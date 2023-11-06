@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "levels", schema = "itproject", catalog = "")
+@Table(name = "levels", schema = "clothesstore", catalog = "")
 public class LevelsEntity {
     private int levelId;
     private BigDecimal discount;

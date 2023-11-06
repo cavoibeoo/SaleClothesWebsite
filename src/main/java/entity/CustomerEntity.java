@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @NamedQuery(name = "CustomerbyFirstname", query = "select e from CustomerEntity e where e.firstName= ?1")
-@Table(name = "customer", schema = "itproject", catalog = "")
+@Table(name = "customer", schema = "clothesstore", catalog = "")
 public class CustomerEntity {
     @Override
     public String toString() {

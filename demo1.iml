@@ -20,7 +20,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="default" value="02eee068-2aea-40a9-a46a-764e5d51a6a7" />
+          <factory-entry name="default" value="80885bad-d106-496b-9431-4b42ca6a6a37" />
         </datasource-mapping>
         <naming-strategy-map>
           <unit-entry name="default" />
@@ -55,6 +55,15 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/src/lib/mysql-connector-j-8.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/taglibs-standard-impl-1.2.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

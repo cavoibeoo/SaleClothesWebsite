@@ -5,8 +5,13 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "customeraccount", schema = "itproject", catalog = "")
+@NamedQuery(name = "CheckLogin", query = "select e from CustomeraccountEntity e where e.mail = ?1 and e.pwd = ?2")
+@Table(name = "customeraccount", schema = "clothesstore")
 public class CustomeraccountEntity {
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = entityManager.getTransaction();
+
     private int customerId;
     private String mail;
     private String pwd;
@@ -64,4 +69,23 @@ public class CustomeraccountEntity {
     public int hashCode() {
         return Objects.hash(customerId, mail, pwd, totalPayment);
     }
+
+    public boolean CheckLogin() {
+        try {
+
+            transaction.begin();
+            TypedQuery<CustomeraccountEntity> Result = entityManager.createNamedQuery("CheckLogin", CustomeraccountEntity.class);
+            Result.setParameter(1, this.mail);
+            Result.setParameter(2, this.pwd);
+            if (Result.getResultList().stream().count() != 0)
+                return true;
+            transaction.commit();
+            return false;
+        }catch (Exception exception) {
+            return false;
+        }
+
+    }
+
+
 }

@@ -1,50 +1,142 @@
 package login;
 
+import entity.CustomeraccountEntity;
+import util.CookieUtil;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+
+import java.math.BigDecimal;
 import java.sql.*;
 
-@WebServlet("/login")
+@WebServlet(urlPatterns = "/login", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/your_database";
-    private static final String JDBC_USERNAME = "your_username";
-    private static final String JDBC_PASSWORD = "your_password";
+    @Override
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
 
-        if (authenticateUser(username, password)) {
-            // Đăng nhập thành công, chuyển hướng đến trang chính
-            response.sendRedirect("main.jsp");
-        } else {
-            // Đăng nhập thất bại, chuyển hướng đến trang đăng ký
-            response.sendRedirect("register.jsp");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        String url = "/login.jsp";
+
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "stay";  // default action
         }
+        if (action.equals("stay")){
+            url = "/login.jsp";
+        }
+        else if (action.equals("go")){
+            String message = null;
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            url = "/login.jsp";
+            try{
+                transaction.begin();
+                CustomeraccountEntity cus1 = new CustomeraccountEntity();
+                cus1.setMail(username);
+                cus1.setPwd(password);
+                if(cus1.CheckLogin())
+                    url = "/Home.jsp";
+                else
+                    message = "Invalid Login Information!";
+               transaction.commit();
+                } finally {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+                entityManager.close();
+                entityManagerFactory.close();
+            }
+            request.setAttribute("message", message);
+
+        }
+        else if (action.equals("regist")){
+            String registusername = request.getParameter("email");
+            String registpassword = request.getParameter("password");
+            url = "/Home.jsp";
+            try{
+                transaction.begin();
+                CustomeraccountEntity cus1 = new CustomeraccountEntity();
+                BigDecimal bd = new BigDecimal(0.00);
+                cus1.setMail(registusername);
+                cus1.setPwd(registpassword);
+                cus1.setTotalPayment(bd);
+                entityManager.persist(cus1);
+
+                // store the User object as a session attribute
+                HttpSession session = request.getSession();
+                session.setAttribute("user", cus1);
+
+                // add a cookie that stores the user's email to browser
+                Cookie c = new Cookie("userEmail", registusername);
+                c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 2 years
+                response.addCookie(c);
+
+                transaction.commit();
+            } finally {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                    url = "/register.jsp";
+                }
+                entityManager.close();
+                entityManagerFactory.close();
+            }
+        }
+        else if (action.equals("CheckUser")) {
+            url = CheckUser(request, response);
+        }
+
+        getServletContext()
+                .getRequestDispatcher(url)
+                .forward(request, response);
     }
 
-    private boolean authenticateUser(String username, String password) {
-        try {
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
-            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
+    private String CheckUser (HttpServletRequest request,
+                             HttpServletResponse response) {
+//        String productCode = request.getParameter("productCode");
+        HttpSession session = request.getSession();
+//        session.setAttribute("productCode", productCode);
+        CustomeraccountEntity user = (CustomeraccountEntity) session.getAttribute("user");
 
-            if (resultSet.next()) {
-                // Tìm thấy người dùng trong cơ sở dữ liệu
-                return true;
+        String url;
+        // if User object doesn't exist, check email cookie
+        if (user == null) {
+            Cookie[] cookies = request.getCookies();
+            String emailAddress = CookieUtil.getCookieValue(cookies, "emailCookie");
+
+            // if cookie doesn't exist, go to Registration page
+            if (emailAddress == null || emailAddress.equals("")) {
+                url = "/login.jsp";
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // if cookie exists, create User object and go to Downloads page
+            else {
+                session.setAttribute("user", user);
+                url = "/CustomerAccount.html";
+            }
         }
-
-        return false;
+        // if User object exists, go to Downloads page
+        else {
+            url = "/CustomerAccount.html";
+        }
+        return url;
+    }
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
     }
 }
 

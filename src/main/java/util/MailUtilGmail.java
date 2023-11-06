@@ -19,6 +19,7 @@ public class MailUtilGmail {
         props.put("mail.smtps.quitwait", "false");
         Session session = Session.getDefaultInstance(props);
         session.setDebug(true);
+
         // 2 - create a message
         Message message = new MimeMessage(session);
         message.setSubject(subject);
@@ -27,6 +28,7 @@ public class MailUtilGmail {
         } else {
             message.setText(body);
         }
+
         // 3 - address the message
         Address fromAddress = new InternetAddress(from);
         Address toAddress = new InternetAddress(to);

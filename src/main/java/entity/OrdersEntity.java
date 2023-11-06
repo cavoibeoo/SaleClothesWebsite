@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "orders", schema = "itproject", catalog = "")
+@Table(name = "orders", schema = "clothesstore", catalog = "")
 public class OrdersEntity {
     private int orderId;
     private int totalAmount;

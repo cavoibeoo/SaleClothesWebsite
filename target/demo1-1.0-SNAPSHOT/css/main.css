@@ -3309,6 +3309,18 @@ input.num-product::-webkit-inner-spin-button {
 
   
 }
+.title_head .padding__ {
+  padding: 0px 30px 0px 0px;
+  background-color: #fff;
+  position: relative;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto",sans-serif;
+  margin-bottom: 20px;
+  display: block;
+}
+
+
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -3336,5 +3348,5 @@ input.num-product::-webkit-inner-spin-button {
   .respon3 {
     padding: 20px;
   }
-
 }
+
