@@ -53,19 +53,14 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li class="active-menu">
-								<a href="#">Home</a>
-<!--								<ul class="sub-menu">-->
-<!--									<li><a href="index.html">Homepage 1</a></li>-->
-<!--									<li><a href="Home.jsp">Homepage 2</a></li>-->
-<!--									<li><a href="home-03.html">Homepage 3</a></li>-->
-<!--								</ul>-->
-							</li>
-
-							<li>
-								<a href="product.jsp">Shop</a>
+								<a href="Home.jsp">Home</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
+								<a href="product.jsp">Shop</a>
+							</li>
+
+							<li>
 								<a href="login?action=CheckUser">Cart</a>
 							</li>
 

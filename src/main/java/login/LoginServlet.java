@@ -123,12 +123,12 @@ public class LoginServlet extends HttpServlet {
             // if cookie exists, create User object and go to Downloads page
             else {
                 session.setAttribute("user", user);
-                url = "/CustomerAccount.html";
+                url = "/CustomerAccount.jsp";
             }
         }
         // if User object exists, go to Downloads page
         else {
-            url = "/CustomerAccount.html";
+            url = "/CustomerAccount.jsp";
         }
         return url;
     }
