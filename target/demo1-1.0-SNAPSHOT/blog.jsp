@@ -168,7 +168,7 @@
 							Help & FAQs
 						</a>
 
-						<a href="CustomerAccount.jsp" class="flex-c-m p-lr-10 trans-04">
+						<a href="login?action=CheckUser" class="flex-c-m p-lr-10 trans-04">
 							My Account
 						</a>
 

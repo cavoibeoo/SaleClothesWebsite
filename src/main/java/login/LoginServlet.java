@@ -51,6 +51,16 @@ public class LoginServlet extends HttpServlet {
                     url = "/Home.jsp";
                 else
                     message = "Invalid Login Information!";
+
+                // store the User object as a session attribute
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", cus1);
+
+                // add a cookie that stores the user's email to browser
+                Cookie c = new Cookie("userEmail", username);
+                c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 2 years
+                response.addCookie(c);
+
                transaction.commit();
                 } finally {
                 if (transaction.isActive()) {
@@ -105,12 +115,10 @@ public class LoginServlet extends HttpServlet {
 
     private String CheckUser (HttpServletRequest request,
                              HttpServletResponse response) {
-//        String productCode = request.getParameter("productCode");
         HttpSession session = request.getSession();
-//        session.setAttribute("productCode", productCode);
         CustomeraccountEntity user = (CustomeraccountEntity) session.getAttribute("user");
-
         String url;
+
         // if User object doesn't exist, check email cookie
         if (user == null) {
             Cookie[] cookies = request.getCookies();
@@ -122,6 +130,7 @@ public class LoginServlet extends HttpServlet {
             }
             // if cookie exists, create User object and go to Downloads page
             else {
+                user = (CustomeraccountEntity) session.getAttribute("user");
                 session.setAttribute("user", user);
                 url = "/CustomerAccount.jsp";
             }
