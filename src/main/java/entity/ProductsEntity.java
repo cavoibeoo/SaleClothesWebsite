@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name = "ListAllProduct", query = "select e from ProductsEntity e")
 @Table(name = "products", schema = "clothesstore", catalog = "")
 public class ProductsEntity {
     private int productId;

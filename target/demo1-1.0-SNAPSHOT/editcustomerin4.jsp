@@ -396,68 +396,82 @@
 <!-- AccountInformation -->
 <section class="sec-product bg0 p-t-100 p-b-50">
     <div class="container">
-        <div class="col-xs-12 col-lg-12 adr_title">
-            <h1 class="title-head">Địa chỉ của bạn  <a class="f-right back_account" href="/account" alt=""><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Trang tài khoản</a></h1>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-btn">
-                <p class="btn-row">
-                    <button class="btn-bg-addresss btn-edit-addr btn btn-primary" type="button">+ Thêm địa chỉ</button>
-                </p>
-            </div>
-            <div id="add_address" class="col-md-12 form-list" style="margin-top: 30px;">
-                <form accept-charset="UTF-8" name="Form" action="/account/addresses" onsubmit="return validateForm()" id="customer_address" method="post">
-                    <input name="FormType" type="hidden" value="customer_address">
-                    <input name="utf8" type="hidden" value="true">
-                    <p id="errorFillsx" style="margin-bottom: 10px; color: red; display: none;"></p>
-                    <div class="clearfix row">
-                        <div class="col-xs-12 col-lg-12">
-                            <fieldset class="form-group">
-                                <label>Name<span>*</span></label>
-                                <input type="text" class="form-control req" required="" requiredmsg="Không được bỏ trống" name="FirstName" placeholder="Nhập tên của bạn" value="Tran">
-                            </fieldset>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12">
-                            <fieldset class="form-group">
-                                <label>Địa chỉ<span>*</span></label>
-                                <input type="text" class="form-control req" name="Address1" placeholder="Nhập địa chỉ của bạn" value="">
-                            </fieldset>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <fieldset class="form-group">
-                                <label>Địa chỉ 2</label>
-                                <input type="text" class="form-control" name="Address2" placeholder="Nhập địa chỉ của bạn" value="">
-                            </fieldset>
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12">
-                            <fieldset class="form-group">
-                                <label>Phone Number<span>*</span></label>
-                                <input type="number" class="form-control req " name="PhoneNumber" placeholder="Nhập số điện thoại của bạn" value="">
-                            </fieldset>
-                        </div>
-
-                        <div class="checkbox  col-xs-12 col-lg-12">
-                            <label class="c-input c-checkbox">
-                                <input type="checkbox" id="address_default_address_" name="IsDefault" value="true">
-                                <span class="c-indicator"></span>
-                                Default Address?
-                            </label>
-                        </div>
-                        <div class="form-group clearfix col-xs-12">
-
-                            <div class="col-sm-12" style="margin: 0px 15px;">
-                                <div class="row">
-                                    <button class="btn-bg-addresss btn btn-lg btn-primary" type="submit" id="click_accept"><span>Thêm địa chỉ</span></button>
-                                    <button class="btn-bg-addresss btn btn-lg btn-dark btn-outline article-readmore" type="button" onclick="Bizweb.CustomerAddress.toggleNewForm(); return false;"><span>Hủy</span></button>
+        <div id="parent" class="row">
+            <div id="a" class="col-xs-12 col-sm-12 col-lg-9 col-left-account">
+                <div class="title_head margin-bottom-20 m992">
+                    <h1 class="title_center_page left">
+                        <div id="padding__">Customer Account</div>
+                    </h1>
+                </div>
+                <div class="form-signup name-account m992">
+                    <p><strong>Anhonn, <a href="/account/addresses" style="color:#ad8610;">Quang Tran</a>&nbsp;!</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
+                    <div class="my-account">
+                        <div class="dashboard">
+                            <div class="recent-orders">
+                                <div class="table-responsive tab-all" style="overflow-x:auto;">
+                                    <table class="table table-cart" id="my-orders-table">
+                                        <thead class="thead-default">
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Date</th>
+                                            <%--                                            <th>Shipped to</th>--%>
+                                            <%--                                            <th>Address</th>--%>
+                                            <th>Order Price</th>
+                                            <th>Payment status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="6"><p style="color: #666666">There are no order.</p></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <div class="text-xs-right">
+                                </div>
+                            </div>
+                            <div class="paginate-pages pull-right page-account">
+                                <nav>
+                                    <ul class="pagination clearfix">
+                                        <li class="page-item disabled"><a class="page-link" href="#"><</a></li>
+                                        <li class="page-item disabled"><a class="page-link" href="#">></a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+            </div>
+            <div id="b" class="col-xs-12 col-sm-12 col-lg-3 col-right-account">
+                <div class="block-account">
+                    <div class="block-title-account"><h5 style="color: #323c3f; font-size: 20px">My Account</h5></div>
+                    <div class="block-content form-signup">
+                        <p>Account Name: <strong style="color:#ad8610; line-height: 20px;"> Quang Tran!</strong></p>
+                        <p><i class="fa fa-home font-some" aria-hidden="true"></i>  <span>Address: </span></p>
+                        <p><i class="fa fa-mobile font-some" aria-hidden="true"></i> <span>Phone numbers: </span> </p>
+                        <p><i class="fa fa-map-marker font-some" aria-hidden="true"></i> <span> Address 2: </span></p>
+                        <p><i class="fa fa-yelp font-some" aria-hidden="true"></i> <span> Company: </span></p>
+                        <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Country :</span></p>
+                        <p><i class="fa fa-code font-some" aria-hidden="true"></i> <span> Zip code: </span></p>
+                        <p style="margin-top:20px;"><a href="/account/addresses" class="btn btn-bg full-width btn-lg btn-style article-readmore">Edit</a></p>
+                    </div>
+                </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 </section>
 
