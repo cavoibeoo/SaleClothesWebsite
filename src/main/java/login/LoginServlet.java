@@ -3,6 +3,7 @@ package login;
 import entity.CustomeraccountEntity;
 import util.CookieUtil;
 
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -72,6 +73,50 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", message);
 
         }
+        else if (action.equals("sendmessage")){
+            String useremail = request.getParameter("email");
+            String messages = request.getParameter("msg");
+            // send email to user
+            String to = useremail;
+            String from = "email_list@murach.com";
+            String subject = "Coza Shop had received your sending!";
+            String body = "Dear " + useremail + ",\n\n"
+                    + "Welcome to the world of Coza,\n"
+                    + "I'm assistant Sine,\n\n"
+                    + "Thank you for always trusting and supporting Cozashop during the past time. Through this email Sine has confirmed receipt of your request with reference code CS-221805.\n" +
+                    "While waiting for a response, don't forget to experience shopping at Coza with many incentives\n"
+                    + "Coza hopes you will continue to have wonderful and easy experiences with the shop!\n\n"
+                    + "No matter where you are, far away in the horizon or right in front of your eyes, Sine is always by your side, so if you have any questions, don't hesitate to send Sine's assistant an email to chat@coza. .vn or call now 0355305190 (excluding international subscribers).\n" +
+                    "Assistant Sine thanks you for always accompanying Coza!\n\n"
+                    + "Admin: Duc Quang\n"
+                    + "Admin 2: Tran Phuoc Binh\n"
+                    + "Here are your question:\n\n"
+                    + "------------------------------------------\n"
+                    + messages;
+            boolean isBodyHTML = false;
+            try {
+                util.MailUtilGmail.sendMail(to, from, subject, body,
+                        isBodyHTML);
+            } catch (MessagingException e) {
+                String errorMessage
+                        = "ERROR: Unable to send email. "
+                        + "Check Tomcat logs for details.<br>"
+                        + "NOTE: You may need to configure your system "
+                        + "as described in chapter 14.<br>"
+                        + "ERROR MESSAGE: " + e.getMessage();
+                request.setAttribute("errorMessage", errorMessage);
+                this.log(
+                        "Unable to send email. \n"
+                                + "Here is the email you tried to send: \n"
+                                + "=====================================\n"
+                                + "TO: " + useremail + "\n"
+                                + "FROM: " + from + "\n"
+                                + "SUBJECT: " + subject + "\n\n"
+                                + body + "\n\n");
+            }
+            url = "/Home.jsp";
+        }
+
         else if (action.equals("regist")){
             String registusername = request.getParameter("email");
             String registpassword = request.getParameter("password");
@@ -94,6 +139,41 @@ public class LoginServlet extends HttpServlet {
                 c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 2 years
                 response.addCookie(c);
 
+
+                // send email to user
+                String to = registusername;
+                String from = "email_list@murach.com";
+                String subject = "So happy that you're become Coza Member!";
+                String body = "Dear " + registusername + ",\n\n"
+                        + "Thanks for joining Coza familly. "
+                        + "We'll make sure to send "
+                        + "you announcements about new products "
+                        + "and promotions.\n"
+                        + "Have a great day and thanks again!\n\n"
+                        + "Admin: Duc Quang\n"
+                        + "Admin 2: Tran Phuoc Binh";
+                boolean isBodyHTML = false;
+                try {
+                    util.MailUtilGmail.sendMail(to, from, subject, body,
+                            isBodyHTML);
+                } catch (MessagingException e) {
+                    String errorMessage
+                            = "ERROR: Unable to send email. "
+                            + "Check Tomcat logs for details.<br>"
+                            + "NOTE: You may need to configure your system "
+                            + "as described in chapter 14.<br>"
+                            + "ERROR MESSAGE: " + e.getMessage();
+                    request.setAttribute("errorMessage", errorMessage);
+                    this.log(
+                            "Unable to send email. \n"
+                                    + "Here is the email you tried to send: \n"
+                                    + "=====================================\n"
+                                    + "TO: " + registusername + "\n"
+                                    + "FROM: " + from + "\n"
+                                    + "SUBJECT: " + subject + "\n\n"
+                                    + body + "\n\n");
+                }
+
                 transaction.commit();
             } finally {
                 if (transaction.isActive()) {
@@ -107,11 +187,17 @@ public class LoginServlet extends HttpServlet {
         else if (action.equals("CheckUser")) {
             url = CheckUser(request, response);
         }
+        else if (action.equals("CheckCookie")) {
+            url = CheckCookie(request, response);
+        }
 
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
     }
+
+
+
 
     private String CheckUser (HttpServletRequest request,
                              HttpServletResponse response) {
@@ -138,6 +224,28 @@ public class LoginServlet extends HttpServlet {
         // if User object exists, go to Downloads page
         else {
             url = "/CustomerAccount.jsp";
+        }
+        return url;
+    }
+    private String CheckCookie (HttpServletRequest request,
+                              HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        CustomeraccountEntity user = (CustomeraccountEntity) session.getAttribute("user");
+        String url;
+        if (user == null) {
+            Cookie[] cookies = request.getCookies();
+            String emailAddress = CookieUtil.getCookieValue(cookies, "emailCookie");
+            if (emailAddress == null || emailAddress.equals("")) {
+                url = "/login.jsp";
+            }
+            else {
+                user = (CustomeraccountEntity) session.getAttribute("user");
+                session.setAttribute("user", user);
+                url = "/shoping-cart.jsp";
+            }
+        }
+        else {
+            url = "/shoping-cart.jsp";
         }
         return url;
     }

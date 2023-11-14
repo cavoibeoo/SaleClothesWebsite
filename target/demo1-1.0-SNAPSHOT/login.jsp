@@ -29,9 +29,7 @@
     <!-- Template Main CSS File -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
 <body>
-
 <main>
     <div class="container">
 
@@ -57,7 +55,7 @@
                                 </div>
                                 <form action="login" method="post">
                                     <form class="row g-3 needs-validation" novalidate>
-                                            <input type="hidden" name="action" value="go" >
+                                            <input type="hidden" name="action" value="go">
                                             <div class="col-12">
                                                 <label for="yourUsername" class="form-label">Username</label>
                                                 <div class="input-group has-validation">
