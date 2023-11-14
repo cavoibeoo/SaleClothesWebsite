@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,14 +24,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
-
-
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
         String url = "/login.jsp";
-
         String action = request.getParameter("action");
         if (action == null) {
             action = "stay";  // default action
@@ -38,6 +36,9 @@ public class LoginServlet extends HttpServlet {
         if (action.equals("stay")){
             url = "/login.jsp";
         }
+
+
+        //      <--- Login --->
         else if (action.equals("go")){
             String message = null;
             String username = request.getParameter("username");
@@ -73,6 +74,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", message);
 
         }
+
+        //      <--- Email Sending --->
         else if (action.equals("sendmessage")){
             String useremail = request.getParameter("email");
             String messages = request.getParameter("msg");
@@ -117,6 +120,7 @@ public class LoginServlet extends HttpServlet {
             url = "/Home.jsp";
         }
 
+        //      <--- Regist --->
         else if (action.equals("regist")){
             String registusername = request.getParameter("email");
             String registpassword = request.getParameter("password");
@@ -129,17 +133,13 @@ public class LoginServlet extends HttpServlet {
                 cus1.setPwd(registpassword);
                 cus1.setTotalPayment(bd);
                 entityManager.persist(cus1);
-
                 // store the User object as a session attribute
                 HttpSession session = request.getSession();
                 session.setAttribute("user", cus1);
-
                 // add a cookie that stores the user's email to browser
                 Cookie c = new Cookie("userEmail", registusername);
                 c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 2 years
                 response.addCookie(c);
-
-
                 // send email to user
                 String to = registusername;
                 String from = "email_list@murach.com";
@@ -173,7 +173,6 @@ public class LoginServlet extends HttpServlet {
                                     + "SUBJECT: " + subject + "\n\n"
                                     + body + "\n\n");
                 }
-
                 transaction.commit();
             } finally {
                 if (transaction.isActive()) {
@@ -184,20 +183,30 @@ public class LoginServlet extends HttpServlet {
                 entityManagerFactory.close();
             }
         }
+
+        //      <--- Check login --->
         else if (action.equals("CheckUser")) {
             url = CheckUser(request, response);
         }
+
+        //      <--- Check Cookie --->
         else if (action.equals("CheckCookie")) {
             url = CheckCookie(request, response);
+        }
+
+        //      <--- Logout --->
+        else if (action.equals("logout")) {
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+            url = "/Home.jsp";
         }
 
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
     }
-
-
-
 
     private String CheckUser (HttpServletRequest request,
                              HttpServletResponse response) {
@@ -249,10 +258,20 @@ public class LoginServlet extends HttpServlet {
         }
         return url;
     }
+
+
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        CustomeraccountEntity user = (CustomeraccountEntity) session.getAttribute("user");
+
+        if (user != null || session != null) {
+            request.setAttribute("isLoggedIn", true);
+        } else {
+            request.setAttribute("isLoggedIn", false);
+        }
         doPost(request, response);
     }
 }
