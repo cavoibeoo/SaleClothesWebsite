@@ -1,5 +1,6 @@
 package login;
 
+import entity.CustomerEntity;
 import entity.CustomeraccountEntity;
 import util.CookieUtil;
 
@@ -8,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,8 +63,8 @@ public class LoginServlet extends HttpServlet {
                 c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 2 years
                 response.addCookie(c);
 
-               transaction.commit();
-                } finally {
+                transaction.commit();
+            } finally {
                 if (transaction.isActive()) {
                     transaction.rollback();
                 }
@@ -203,6 +203,31 @@ public class LoginServlet extends HttpServlet {
             url = "/Home.jsp";
         }
 
+        //Edit Customer information
+        else if (action.equals("edit")) {
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            String address = request.getParameter("address");
+            String phonenumber = request.getParameter("phonenumber");
+
+            HttpSession session = request.getSession();
+            CustomerEntity user = (CustomerEntity) session.getAttribute("user");
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPhoneNumber(phonenumber);
+            user.setAddress(address);
+            request.setAttribute("user", user);
+
+            String message;
+            if (firstName == null || lastName == null || address == null || phonenumber == null ||
+                    firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || phonenumber.isEmpty()) {
+                message = "Please fill out all three text boxes.";
+            } else {
+                message = null;
+                url = "/CustomerAccount.jsp";
+            }
+            request.setAttribute("message", message);
+        }
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
@@ -212,6 +237,19 @@ public class LoginServlet extends HttpServlet {
                              HttpServletResponse response) {
         HttpSession session = request.getSession();
         CustomeraccountEntity user = (CustomeraccountEntity) session.getAttribute("user");
+        CustomerEntity userinfo = (CustomerEntity) session.getAttribute("userinfo");
+
+        String emailUser = user.getMail();
+        String firstname = userinfo.getFirstName();
+        String lastname = userinfo.getLastName();
+        String address = userinfo.getAddress();
+        String phonenum = userinfo.getPhoneNumber();
+        session.setAttribute("emailuser", emailUser);
+        session.setAttribute("firstname", firstname);
+        session.setAttribute("lastname", lastname);
+        session.setAttribute("address", address);
+        session.setAttribute("phonenum", phonenum);
+
         String url;
 
         // if User object doesn't exist, check email cookie
@@ -225,17 +263,24 @@ public class LoginServlet extends HttpServlet {
             }
             // if cookie exists, create User object and go to Downloads page
             else {
-                user = (CustomeraccountEntity) session.getAttribute("user");
-                session.setAttribute("user", user);
-                url = "/CustomerAccount.jsp";
+                String emailuser = user.getMail();
+                session.setAttribute("user", emailAddress);
+                session.setAttribute("emailuser", emailAddress);
+                url = "order?";
             }
         }
         // if User object exists, go to Downloads page
         else {
-            url = "/CustomerAccount.jsp";
+            url = "/order?";
         }
+        request.setAttribute("emailuser", emailUser);
+        request.setAttribute("firstname", firstname);
+        request.setAttribute("lastname", lastname);
+        request.setAttribute("address", address);
+        request.setAttribute("phonenum", phonenum);
         return url;
     }
+
     private String CheckCookie (HttpServletRequest request,
                               HttpServletResponse response) {
         HttpSession session = request.getSession();
@@ -250,15 +295,14 @@ public class LoginServlet extends HttpServlet {
             else {
                 user = (CustomeraccountEntity) session.getAttribute("user");
                 session.setAttribute("user", user);
-                url = "/shoping-cart.jsp";
+                url = "/cart?";
             }
         }
         else {
-            url = "/shoping-cart.jsp";
+            url = "/cart?";
         }
         return url;
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request,
@@ -267,10 +311,8 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         CustomeraccountEntity user = (CustomeraccountEntity) session.getAttribute("user");
 
-        if (user != null || session != null) {
+        if (user != null ) {
             request.setAttribute("isLoggedIn", true);
-        } else {
-            request.setAttribute("isLoggedIn", false);
         }
         doPost(request, response);
     }

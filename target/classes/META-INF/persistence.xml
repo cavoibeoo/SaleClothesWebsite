@@ -13,6 +13,8 @@
         <class>entity.OrdersEntity</class>
         <class>entity.ProductsEntity</class>
         <class>entity.StyleEntity</class>
+        <class>entity.SizeEntity</class>
+        <class>entity.SizeProductEntity</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/clothesstore"/>

@@ -1,9 +1,7 @@
-import entity.CustomerEntity;
-import entity.CustomeraccountEntity;
-import entity.ProductsEntity;
-import entity.StyleEntity;
+import entity.*;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,55 +13,29 @@ public class Main {
         EntityTransaction transaction = entityManager.getTransaction();
 
         try {
-
-////            ------INSERT------
-            transaction.begin();
-
-            List<ProductsEntity> list = new ArrayList<>();
-            TypedQuery<ProductsEntity> ListAllProduct = entityManager.createNamedQuery("ListAllProduct", ProductsEntity.class);
-            try {
-                for (ProductsEntity productsEntity : ListAllProduct.getResultList()) {
-//                    list.add(ProductsEntity(productsEntity.getProductId(), productsEntity.getProductName()));
+            String checkedProducts[] = new String[] {"3"};
+            
+            for (int i=0; i<checkedProducts.length; i++){
+                CustomerProductEntityPK pk = new CustomerProductEntityPK();
+                pk.setCustomerId(1);
+                pk.setProductId(Integer.parseInt(checkedProducts[i]));
+                CustomerProductEntity product = entityManager.find(CustomerProductEntity.class, pk);
+                if (product != null){
+                    byte stat = 1;
+                    product.setStatus(stat);
+                    transaction.begin();
+                    entityManager.merge(product);
+                    transaction.commit();
                 }
-                System.out.println(list);
-            }catch (Exception e) {
-
             }
-
-//            CustomeraccountEntity quang = new CustomeraccountEntity();
-//            BigDecimal bd = new BigDecimal(0.00);
-//            quang.setMail("qauang@123");
-//            quang.setPwd("123");
-//            quang.setTotalPayment(bd);
-//            entityManager.persist(quang);
-
-
-//            -------ExecuteQueryWrittren-------
-//            transaction.begin();
-//
-//            TypedQuery<CustomerEntity> CustomerByFirstName = entityManager.createNamedQuery("CustomerbyFirstname", CustomerEntity.class);
-//            CustomerByFirstName.setParameter(1, "Quang");
-//            for (CustomerEntity customerEntity : CustomerByFirstName.getResultList()) {
-//                System.out.println(customerEntity);
-//            }
-
-            //--------ExecuteSQLQUery------
-//              transaction.begin();
-//
-//              Query countQuang = entityManager.createNativeQuery("SELECT COUNT(*) AS QuangCount FROM customer WHERE firstName =:customername");
-//              countQuang.setParameter("customername", "Quang");
-//              System.out.println("Có tất cả " + countQuang.getSingleResult() + " Thằng khách tên Quang");
-
-
-
+            transaction.begin();
+            Query query = entityManager.createNativeQuery("CALL PROC_DeleteBoughtInCart(:param1)");
+            query.setParameter("param1", 1);
+            query.executeUpdate();
             transaction.commit();
         } finally {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
             entityManager.close();
             entityManagerFactory.close();
-
         }
     }
 }

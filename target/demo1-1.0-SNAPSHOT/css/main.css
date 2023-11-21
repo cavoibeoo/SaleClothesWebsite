@@ -35,60 +35,60 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/Poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
   font-family: Poppins-Light;
-  src: url('../fonts/Poppins/Poppins-Light.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Light.ttf');
 }
 
 @font-face {
   font-family: Poppins-ExtraLight;
-  src: url('../fonts/Poppins/Poppins-ExtraLight.ttf'); 
+  src: url('../fonts/Poppins/Poppins-ExtraLight.ttf');
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/Poppins/Poppins-Medium.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
   font-family: Poppins-Italic;
-  src: url('../fonts/Poppins/Poppins-Italic.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Italic.ttf');
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/Poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../fonts/Poppins/Poppins-SemiBold.ttf'); 
+  src: url('../fonts/Poppins/Poppins-SemiBold.ttf');
 }
 
 
 /*---------------------------------------------*/
 @font-face {
   font-family: PlayfairDisplay-Regular;
-  src: url('../fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf'); 
+  src: url('../fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf');
 }
 
 @font-face {
   font-family: PlayfairDisplay-Bold;
-  src: url('../fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf'); 
+  src: url('../fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf');
 }
 
 /*---------------------------------------------*/
 @font-face {
   font-family: Montserrat-Regular;
-  src: url('../fonts/Montserrat/Montserrat-Regular.ttf'); 
+  src: url('../fonts/Montserrat/Montserrat-Regular.ttf');
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('../fonts/Montserrat/Montserrat-Bold.ttf'); 
+  src: url('../fonts/Montserrat/Montserrat-Bold.ttf');
 }
 
 
@@ -140,7 +140,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   position: relative;
   animation: loader-scale 1s ease-out infinite;
   top: 50%;
-  margin: -28px auto 0 auto; 
+  margin: -28px auto 0 auto;
 }
 
 @keyframes loader-scale {
@@ -151,7 +151,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     opacity: 1; }
   100% {
     transform: scale(1);
-    opacity: 0; } 
+    opacity: 0; }
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -405,7 +405,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   -ms-box-shadow: 0 1px 5px 0px rgba(0,0,0,0.2);
 
   visibility: hidden;
-  opacity: 0; 
+  opacity: 0;
 }
 
 /*.sub-menu li {*/
@@ -430,7 +430,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   color: #555;
 
   display: block;
-  padding: 8px 20px; 
+  padding: 8px 20px;
   width: 100%;
 
   transition: all 0.4s;
@@ -566,7 +566,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   font-size: 50px;
   line-height: 1.2;
   color: #333;
-  
+
   padding: 0px 30px 0px 0px;
   width: calc(100% - 70px);
   height: 100%;
@@ -764,8 +764,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   max-width: calc(100% - 20px);
   max-height: 100%;
   position:absolute;
-  top: 0; 
-  left: 0; 
+  top: 0;
+  left: 0;
   bottom: 0;
   margin: auto;
 }
@@ -904,10 +904,10 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   right: 0;
   background-color: rgba(0,0,0,0.0);
   visibility: hidden;
-  
+
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;  
+  -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
 
@@ -920,7 +920,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   top: 0;
   right: -400px;
   background-color: #fff;
-  
+
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.34s;
@@ -1000,10 +1000,10 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   right: 0;
   background-color: rgba(0,0,0,0.0);
   visibility: hidden;
-  
+
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;  
+  -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
 
@@ -1016,7 +1016,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   top: 0;
   right: -400px;
   background-color: #fff;
-  
+
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.34s;
@@ -1327,7 +1327,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   color: rgba(0,0,0,0.3);
   position: absolute;
   opacity: 0;
-  
+
   top: 50%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
@@ -1524,7 +1524,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .arrow-slick3 {
   font-size: 25px;
   color: #fff;
-  
+
   position: absolute;
   top: 0;
   width: 40px;
@@ -1729,8 +1729,8 @@ button.mfp-close {
 .swal-overlay {overflow-y: auto;}
 
 .swal-button:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 
 .swal-button {
@@ -1772,7 +1772,7 @@ button.mfp-close {
 }
 
 .swal-footer {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 
@@ -1802,7 +1802,7 @@ button.mfp-close {
   background-color: #f2f2f2;
   border-left: 1px solid #e7e7e7;
   border-bottom: 1px solid #e7e7e7;
-  
+
   transform-origin: center center;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -1897,7 +1897,7 @@ input.num-product {
 input.num-product::-webkit-outer-spin-button,
 input.num-product::-webkit-inner-spin-button {
   -webkit-appearance: none;
-  margin: 0; 
+  margin: 0;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -1938,7 +1938,7 @@ input.num-product::-webkit-inner-spin-button {
   -o-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
-  
+
   visibility: hidden;
   opacity: 0;
 }
@@ -3365,7 +3365,7 @@ input.num-product::-webkit-inner-spin-button {
   .respon1 {
     font-size: 40px;
   }
-  
+
   /*---------------------------------------------*/
   .respon2 {
     font-size: 20px;
@@ -3385,7 +3385,7 @@ input.num-product::-webkit-inner-spin-button {
     padding-left: 60px;
   }
 
-  
+
 }
 .title_head .padding__ {
   padding: 0px 30px 0px 0px;

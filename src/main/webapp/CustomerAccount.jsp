@@ -1,3 +1,6 @@
+<%@ page import="java.util.List" %>
+<%@ page import="entity.OrdersEntity" %>
+<%@ page import="org.hibernate.criterion.Order" %>
 <%@ include file="includes/header.jsp" %>
 
 <!-- AccountInformation -->
@@ -20,15 +23,32 @@
                                 <div class="table-responsive tab-all" style="overflow-x:auto;">
                                     <table class="table table-cart" id="my-orders-table">
                                         <thead class="thead-default">
-                                        <tr>
-                                            <th>Order</th>
-                                            <th>Date</th>
-<%--                                            <th>Shipped to</th>--%>
-<%--                                            <th>Address</th>--%>
-                                            <th>Order Price</th>
-                                            <th>Payment status</th>
+                                        <tr class="table_head">
+                                            <th class="column-0">Order</th>
+                                            <th class="column-1">Date</th>
+                                            <%--                                            <th>Shipped to</th>--%>
+                                            <%--                                            <th>Address</th>--%>
+                                            <th class="column-2">Order Price</th>
+                                            <th class="column-3">Payment status</th>
                                         </tr>
                                         </thead>
+
+                                        <% List<OrdersEntity> customerOrders = (List<OrdersEntity>) session.getAttribute("customerOrders"); %>
+                                        <c:if test="${customerOrders != null}">
+                                            <% for (OrdersEntity order : customerOrders) { %>
+                                            <tr class="table_row">
+                                                <td class="column-0">
+                                                    <%=order.getOrderId()%>
+                                                </td>
+                                                <td class="column-1">
+                                                    <%=order.getDate()%>
+                                                </td>
+                                                <td class="column-2"><%= order.getTotalAmount() %></td>
+                                                <td class="column-3"> <%= order.getStatus() %></td>
+                                            </tr>
+                                            <% } %>
+                                        </c:if>
+
                                         <tbody>
                                         <tr>
                                             <td colspan="6"><p style="color: #666666">There are no order.</p></td>
@@ -58,10 +78,10 @@
                         <p>Account Name: <strong style="color:#ad8610; line-height: 20px;"> Quang Tran!</strong></p>
                         <p><i class="fa fa-home font-some" aria-hidden="true"></i>  <span>Address: </span></p>
                         <p><i class="fa fa-mobile font-some" aria-hidden="true"></i> <span>Phone numbers: </span> </p>
-                        <p><i class="fa fa-map-marker font-some" aria-hidden="true"></i> <span> Address 2: </span></p>
-                        <p><i class="fa fa-yelp font-some" aria-hidden="true"></i> <span> Company: </span></p>
-                        <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Country :</span></p>
-                        <p><i class="fa fa-code font-some" aria-hidden="true"></i> <span> Zip code: </span></p>
+<%--                        <p><i class="fa fa-map-marker font-some" aria-hidden="true"></i> <span> Address 2: </span></p>--%>
+<%--                        <p><i class="fa fa-yelp font-some" aria-hidden="true"></i> <span> Company: </span></p>--%>
+<%--                        <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Country :</span></p>--%>
+<%--                        <p><i class="fa fa-code font-some" aria-hidden="true"></i> <span> Zip code: </span></p>--%>
                         <p style="margin-top:20px;"><a href="editcustomerin4.jsp" class="btn btn-bg full-width btn-lg btn-style article-readmore">Edit</a></p>
                     </div>
                 </div>

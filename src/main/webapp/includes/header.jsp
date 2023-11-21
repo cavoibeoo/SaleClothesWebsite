@@ -1,3 +1,5 @@
+<%@ page import="entity.CustomerProductEntity" %>
+<%@ page import="entity.CustomerEntity" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +36,10 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
-    <%@ page import="java.io.*,java.util.*" %>
-    <%@ page import="javax.servlet.*" %>
-    <%@ page import="javax.servlet.http.*" %>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <!--===============================================================================================-->
 
+    <!--===============================================================================================-->
 </head>
 <body class="animsition">
     <!-- Header -->
@@ -62,7 +62,7 @@
                             </li>
 
                             <li class="label1" data-label1="hot">
-                                <a href="product.jsp">Shop</a>
+                                <a href="productList?">Shop</a>
                             </li>
 
                             <li>
@@ -208,7 +208,7 @@
                         <a href="login?action=CheckUser" class="stext-102 cl2 hov-cl1 trans-04">
                             My Account
                             <c:if test="${isLoggedIn eq true}">
-                                <span class="useraccount"> (quangcuatuonglai@gmail.com) </span>
+                                <span class="useraccount"> <%= session.getAttribute("user") %> </span>
                             </c:if>
                         </a>
                     </li>
@@ -227,10 +227,10 @@
                     <form action="login" method="post">
                         <input type="hidden" name="action" value="logout">
                         <c:if test="${isLoggedIn eq true}">
-                        <button class="Btn">
-                            <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
-                            <div class="text">Logout</div>
-                        </button>
+                            <button class="Btn">
+                                <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+                                <div class="text">Logout</div>
+                            </button>
                         </c:if>
                     </form>
                 </ul>
@@ -317,22 +317,32 @@
 
             <div class="header-cart-content flex-w js-pscroll">
                 <ul class="header-cart-wrapitem w-full">
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/item-cart-01.jpg" alt="IMG">
-                        </div>
 
-                        <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                White Shirt Pleat
-                            </a>
+<%--                    <%CustomerEntity user = (CustomerEntity) session.getAttribute("user");%>--%>
+<%--                        <% List<CustomerProductEntity> customerCart = (List<CustomerProductEntity>) session.getAttribute("cart"); %>--%>
+<%--                        <c:if test="${customerCart != null}">--%>
+<%--                            <% for (CustomerProductEntity product : customerCart) { %>--%>
+                                <li class="header-cart-item flex-w flex-t m-b-12">
+                                    <div class="header-cart-item-img">
+<%--                                        <% String itemCartVariable = "images/item-cart-01" + /*product.getProductId() +*/ ".jpg"; %>--%>
+                                        <img src="images/item-cart-01" alt="IMG">
+                                    </div>
 
-                            <span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-                        </div>
-                    </li>
+                                    <div class="header-cart-item-txt p-t-8">
+                                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                            White Shirt Pleat
 
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                        1 x $19.00
+                                    </span>
+                                    </div>
+                                </li>
+
+<%--                            <% } %>--%>
+<%--                        </c:if>--%>
+<%--
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
                             <img src="images/item-cart-02.jpg" alt="IMG">
@@ -364,7 +374,7 @@
 							</span>
                         </div>
                     </li>
-                </ul>
+                </ul>--%>
 
                 <div class="w-full">
                     <div class="header-cart-total w-full p-tb-40">
@@ -372,7 +382,7 @@
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <a href="shoping-cart.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                        <a href="cart?" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                             View Cart
                         </a>
 

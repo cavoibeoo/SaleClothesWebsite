@@ -1,7 +1,7 @@
 <%@ page import="entity.ProductsEntity" %>
 <%@ page import="java.util.List" %>
 <%@ include file="includes/header.jsp" %>
-
+<%ProductsEntity currItem = new ProductsEntity();%>
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140">
 	<div class="container">
@@ -248,18 +248,18 @@
 		</div>
 
 		<div class="row isotope-grid">
-			<% List<ProductsEntity> productList = (List<ProductsEntity>) application.getAttribute("productList"); %>
+			<% List<ProductsEntity> productList = (List<ProductsEntity>) session.getAttribute("productList"); %>
 			<c:if test="${productList != null}">
 				<% for (ProductsEntity product :  productList) { %>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<% String itemCartVariable = "images/product-0" + product.getProductId() + ".jpg"; %>
+							<% String itemCartVariable = "images/product/product-" + product.getProductId() + ".jpg"; %>
 							<img src="<%= itemCartVariable %>" alt="IMG-PRODUCT">
 
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Quick View
+							<a href="productDetail?id=<%=product.getProductId()%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 <%--js-show-modal1--%>">
+								Details
 							</a>
 						</div>
 
@@ -285,7 +285,6 @@
 				</div>
 				<% } %>
 			</c:if>
-			</form>
 
 		</div>
 

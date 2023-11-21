@@ -9,27 +9,40 @@ import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import java.io.IOException;
 import java.util.List;
 import javax.persistence.EntityTransaction;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/productList", name = "ProductListServlet", loadOnStartup = 1)
+@WebServlet(urlPatterns = "/productList", name = "ProductListServlet")
 public class ProductListServlet extends HttpServlet {
-
+    
     @Override
-    public void init() throws ServletException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        doPost_GetShop(req, resp);
+        
+        req.getRequestDispatcher("/product.jsp").forward(req, resp);
+    }
+    
+    protected void doPost_GetShop(HttpServletRequest req, HttpServletResponse resp){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-
-        transaction.begin();
-
+        
         // Call the named query
         TypedQuery<ProductsEntity> query = entityManager.createNamedQuery("ListAllProduct", ProductsEntity.class);
         List<ProductsEntity> productList = query.getResultList();
-
-        transaction.commit();
-        getServletContext().setAttribute("productList", productList);
-
-        String url = "/Home.jsp";
+        
+        HttpSession session = req.getSession();
+        
+        session.setAttribute("productList", productList);
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 }

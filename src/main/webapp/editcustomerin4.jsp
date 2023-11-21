@@ -1,69 +1,65 @@
 <%@ include file="includes/header.jsp" %>
 
-<!-- AccountInformation -->
-<section class="sec-product bg0 p-t-100 p-b-50">
-    <div class="container">
-        <div id="parent" class="row">
-            <div id="a" class="col-xs-12 col-sm-12 col-lg-9 col-left-account">
-                <div class="title_head margin-bottom-20 m992">
-                    <h1 class="title_center_page left">
-                        <div id="padding__">Customer Account</div>
-                    </h1>
-                </div>
-                <div class="form-signup name-account m992">
-                    <p><strong>Anhonn, <a href="/account/addresses" style="color:#ad8610;">Quang Tran</a>&nbsp;!</strong></p>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-lg-12 no-padding">
-                    <div class="my-account">
-                        <div class="dashboard">
-                            <div class="recent-orders">
-                                <div class="table-responsive tab-all" style="overflow-x:auto;">
-                                    <table class="table table-cart" id="my-orders-table">
-                                        <thead class="thead-default">
-                                        <tr>
-                                            <th>Order</th>
-                                            <th>Date</th>
-                                            <%--                                            <th>Shipped to</th>--%>
-                                            <%--                                            <th>Address</th>--%>
-                                            <th>Order Price</th>
-                                            <th>Payment status</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td colspan="6"><p style="color: #666666">There are no order.</p></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+<section class="address margin-top-20">
+    <div class="container page_address">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 adr_title">
+                <h1 class="title-head">Edit Account Information  <a class="f-right back_account" href="login?action=CheckUser" alt=""><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back to account pages</a></h1>
+            </div>
+            <div class="col-sm-12 col-lg-12 col-address">
+                <c:if test="${message != null}">
+                    <p style="border: #1c1e28; text-align: center; color: #ea1717"><i>${message}</i></p>
+                </c:if>
+                <div class="row">
+                    <div id="add_address" class="col-md-12 form-list" style="margin-top: 30px;">
+                        <form accept-charset="UTF-8" name="Form" action="accountservlet" onsubmit="return validateForm()" id="customer_address" method="edit">
+                            <input name="FormType" type="hidden" value="customer_address">
+                            <input name="utf8" type="hidden" value="true">
+                            <p id="errorFillsx" style="margin-bottom: 10px; color: red; display: none;"></p>
+                            <div class="clearfix row">
+                                <input type="hidden" name="action" value="add">
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label>Name<span>*</span></label>
+                                        <input type="text" class="form-control req" required requiredmsg="Please fill this information!" name="firstName" placeholder="Input your name" value="Tran">
+                                    </fieldset>
                                 </div>
-                                <div class="text-xs-right">
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label>Surname<span>*</span></label>
+                                        <input type="text" class="form-control req" required requiredmsg="Please fill this information!" name="lastName" placeholder="Input your surname" value="Quang">
+                                    </fieldset>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label>Address<span>*</span></label>
+                                        <input type="text" class="form-control req" name="address" placeholder="Input your address" value="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label>Phone number<span>*</span></label>
+                                        <input type="number" class="form-control req " name="phonenumber" placeholder="Input your phone number" value="">
+                                    </fieldset>
+                                </div>
+
+
+                                <div class="form-group clearfix col-xs-12">
+                                    <div class="col-sm-12" style="margin: 0px 15px;">
+                                        <div class="row">
+                                            <button class="btn-bg-addresss btn btn-lg btn-primary" type="submit" id="click_accept"><span>Save</span></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="paginate-pages pull-right page-account">
-                                <nav>
-                                    <ul class="pagination clearfix">
-                                        <li class="page-item disabled"><a class="page-link" href="#"><</a></li>
-                                        <li class="page-item disabled"><a class="page-link" href="#">></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div id="b" class="col-xs-12 col-sm-12 col-lg-3 col-right-account">
-                <div class="block-account">
-                    <div class="block-title-account"><h5 style="color: #323c3f; font-size: 20px">My Account</h5></div>
-                    <div class="block-content form-signup">
-                        <p>Account Name: <strong style="color:#ad8610; line-height: 20px;"> Quang Tran!</strong></p>
-                        <p><i class="fa fa-home font-some" aria-hidden="true"></i>  <span>Address: </span></p>
-                        <p><i class="fa fa-mobile font-some" aria-hidden="true"></i> <span>Phone numbers: </span> </p>
-                        <p><i class="fa fa-map-marker font-some" aria-hidden="true"></i> <span> Address 2: </span></p>
-                        <p><i class="fa fa-yelp font-some" aria-hidden="true"></i> <span> Company: </span></p>
-                        <p><i class="fa fa-plane font-some" aria-hidden="true"></i> <span> Country :</span></p>
-                        <p><i class="fa fa-code font-some" aria-hidden="true"></i> <span> Zip code: </span></p>
-                        <p style="margin-top:20px;"><a href="/account/addresses" class="btn btn-bg full-width btn-lg btn-style article-readmore">Edit</a></p>
-                    </div>
+
+            <div class="col-sm-12 col-lg-12">
+                <div class="row total_address">
+
                 </div>
             </div>
         </div>
