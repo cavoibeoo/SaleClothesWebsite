@@ -58,7 +58,7 @@
                     Your email
                 </h4>
 
-                <form action="login" method="post">
+                <form action="email" method="post">
                     <input type="hidden" name="action" value="sendmessage">
                     <div class="wrap-input1 w-full p-b-4">
                         <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
@@ -205,3 +205,13 @@
 </script>
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
+
+<script src="vendor2/apexcharts/apexcharts.min.js"></script>
+<script src="vendor2/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor2/chart.js/chart.umd.js"></script>
+<script src="vendor2/echarts/echarts.min.js"></script>
+<script src="vendor2/quill/quill.min.js"></script>
+<script src="vendor2/simple-datatables/simple-datatables.js"></script>
+<script src="vendor2/tinymce/tinymce.min.js"></script>
+<script src="vendor2/php-email-form/validate.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>

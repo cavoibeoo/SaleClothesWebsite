@@ -1,7 +1,6 @@
 <%@ page import="entity.CustomerProductEntity" %>
 <%@ page import="java.util.List" %>
 <%@ include file="includes/header.jsp" %>
-
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -15,7 +14,6 @@
 			</span>
 		</div>
 	</div>
-
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85" action = "order" method="post">
 		<div class="container">
@@ -29,7 +27,7 @@
 								<tr class="table_head">
 									<th class="column-0">Checks</th>
 									<th class="column-1">Product</th>
-									<th class="column-2"></th>
+									<th class="column-2">Type</th>
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
@@ -40,7 +38,7 @@
 								<c:if test="${customerCart != null}">
 									<% for (CustomerProductEntity product : customerCart) { %>
 									<tr class="table_row">
-										<td class="column-0">
+										<td class="column-0" style="">
 											<input class="ui-checkbox" type = checkbox name="checkedProduct" value="<%=product.getProductId()%>">
 										</td>
 
@@ -53,10 +51,11 @@
 											</a>
 										</td>
 
-										<td class="column-2"><%= product.assignName() %></td>
+										<td class="column-2"><%= product.assignName() %>  (Size L / Color Red)</td>
+
 										<td class="column-3">$ <%= product.assignUnitPrice() %></td>
 										<% int currentQuantity = product.getQuantity();%>
-										<td class="column-4">
+										<td class="column-4" style="align-content: center">
 											<div class="wrap-num-product flex-w m-l-auto m-r-0">
 												<a class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" href="cart?action=add&id=<%=product.getProductId()%>&quantity=-1">
 													<i class="fs-16 zmdi zmdi-minus"></i>
@@ -141,6 +140,7 @@
 									Proceed Order
 								</div>
 							</button>
+							<a href="orderdetails.html">Proceed Order</a>
 						</div>
 					</div>
 				</div>

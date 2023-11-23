@@ -1,0 +1,262 @@
+<link rel="stylesheet" type="text/css" href="css/orderdetails.css">
+<script src="js/vietnamlocalselector.js"></script>
+<script src="js/citycombobox.js"></script>
+<!--===============================================================================================-->
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+    <body>
+    <div class="content">
+        <div class="wrap">
+            <div class="main">
+                <div class="main-header">
+                    <h1 class="logo-text">COZA SHOP</h1>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="shoping-cart.jsp">Cart</a>
+                        </li>
+                        <li class="breadcrumb-item breadcrumb-item-current">
+                            Order Details
+                        </li>
+                    </ul>
+                </div>
+                <div class="main-content">
+                    <div class="step">
+                        <div class="step-sections steps-onepage" step="1">
+                            <div class="section">
+                                <div class="section-header">
+                                    <h2 class="section-title">Order Details</h2>
+                                </div>
+                                <div class="section-content section-customer-information no-mb">
+                                    <div class="logged-in-customer-information">&nbsp;
+                                        <div class="logged-in-customer-information-avatar-wrapper">
+                                            <div class="logged-in-customer-information-avatar gravatar" style="background-image: url(//www.gravatar.com/avatar/d94b46a8456a3c92a530673be397eabf.jpg?s=100&amp;d=blank);"></div>
+                                        </div>
+                                        <p class="logged-in-customer-information-paragraph">
+                                            Duc Quang (quangktkd91@gmail.com) <span>- level.2</span>
+                                            <br>
+                                            <a>Logout</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="fieldset">
+                                        <div class="field field-show-floating-label">
+                                            <div class="field-input-wrapper field-input-wrapper-select">
+                                                <label class="field-label" for="stored_addresses">Add new address...</label>
+                                                <select class="field-input" id="stored_addresses">
+                                                    <option value="0" data-properties="{}">Address 1</option>
+                                                    <option value="0" data-properties="{}">Address 2</option>
+                                                    <option value="0" data-properties="{}">Address 3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="field field-required  field-show-floating-label">
+                                            <div class="field-input-wrapper">
+                                                <label class="field-label" for="billing_address_full_name">Full Name</label>
+                                                <input placeholder="Full Name" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_full_name" name="billing_address[full_name]" value="Duc Quang" autocomplete="false">
+                                            </div>
+                                        </div>
+                                        <div class="field field-required   field-show-floating-label">
+                                            <div class="field-input-wrapper">
+                                                <label class="field-label" for="billing_address_phone">Phone number</label>
+                                                <input autocomplete="false" placeholder="Phone number" autocapitalize="off" spellcheck="false" class="field-input" size="30" maxlength="15" type="tel" id="billing_address_phone" name="billing_address[phone]" value="0355305120">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="section-content">
+                                    <div class="fieldset">
+
+                                        <form autocomplete="off" id="form_update_shipping_method" class="field default" accept-charset="UTF-8" method="post">
+                                            <input name="utf8" type="hidden" value="✓">
+                                            <div class="content-box mt0">
+
+                                                <div id="form_update_location_customer_shipping" class="order-checkout__loading radio-wrapper content-box-row content-box-row-padding content-box-row-secondary " for="customer_pick_at_location_false">
+                                                    <input name="utf8" type="hidden" value="✓">
+                                                    <div class="order-checkout__loading--box">
+                                                        <div class="order-checkout__loading--circle"></div>
+                                                    </div>
+
+                                                    <div class="field field-required  field-show-floating-label">
+                                                        <div class="field-input-wrapper">
+                                                            <label class="field-label" for="billing_address_address1">Address</label>
+                                                            <input placeholder="Address" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_address1" name="billing_address[address1]" value="268 Hung Vuong - TDP6 - Dak Ha Town">
+                                                        </div>
+                                                    </div>
+                                                    <input name="selected_customer_shipping_country" type="hidden" value="241">
+                                                    <input name="selected_customer_shipping_province" type="hidden" value="40">
+                                                    <input name="selected_customer_shipping_district" type="hidden" value="431">
+                                                    <input name="selected_customer_shipping_ward" type="hidden" value="23500">
+                                                    <div class="field field-show-floating-label field-required field-third ">
+                                                        <div class="field-input-wrapper field-input-wrapper-select">
+                                                            <label class="field-label" for="ls_province"> City  </label>
+                                                            <select class="field-input" id="ls_province" name="customer_shipping_province">
+                                                                <option data-code="null" value="null">
+                                                                    Choose province </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field field-show-floating-label field-required field-third ">
+                                                        <div class="field-input-wrapper field-input-wrapper-select">
+                                                            <label class="field-label" for="ls_district">District</label>
+                                                            <select class="field-input" id="ls_district" name="customer_shipping_district">
+                                                                <option data-code="null" value="null">Choose districts</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field field-show-floating-label field-required  field-third  ">
+                                                        <div class="field-input-wrapper field-input-wrapper-select">
+                                                            <label class="field-label" for="ls_ward">Ward</label>
+                                                            <select class="field-input" id="ls_ward" name="customer_shipping_ward">
+                                                                <option data-code="null" value="null">Choose ward</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-footer" id="step-footer-checkout">
+                            <form action="/checkouts/complete" id="checkout_complete" method="post">
+                                <input name="form_type" type="hidden" value="checkout">
+                                <input name="utf8" type="hidden" value="✓">
+                                <input name="masked_card_id" type="hidden" value="">
+                                <input name="data_type" type="hidden" value="liquid">
+                                <button type="submit" class="step-footer-continue-btn btn">
+                                    <span class="btn-content">Complete</span>
+                                    <i class="btn-spinner icon icon-button-spinner"></i>
+                                </button>
+                                <input name="__RequestVerificationToken" type="hidden">
+                            </form>	<a class="step-footer-previous-link" href="/shoping-cart.jsp">Cart</a>
+                        </div>
+                    </div>
+                </div>a
+                <div class="hrv-coupons-popup-site-overlay"></div>
+                <div class="main-footer footer-powered-by">Powered by Haravan</div>
+            </div>
+            <div class="sidebar">
+                <div class="sidebar-content">
+                    <div class="order-summary order-summary-is-collapsed">
+                        <h2 class="visually-hidden">Thông tin đơn hàng</h2>
+                        <div class="order-summary-sections">
+                            <div class="order-summary-section order-summary-section-product-list" data-order-summary-section="line-items">
+                                <table class="product-table">
+                                    <tbody>
+                                    <tr class="product" data-product-id="1050712263" data-variant-id="1113943469">
+                                        <td class="product-image">
+                                            <div class="product-thumbnail">
+                                                <div class="product-thumbnail-wrapper">
+                                                    <img class="product-thumbnail-image" alt="T-shirt" src="images/product/product-1.jpg">
+                                                </div>
+                                                <span class="product-thumbnail-quantity" aria-hidden="true">2</span>
+                                            </div>
+                                        </td>
+                                        <td class="product-description">
+                                            <span class="product-description-name order-summary-emphasis">T-shirt</span>
+                                            <span class="product-description-variant order-summary-small-text">RED / L</span>
+                                        </td>
+                                        <td class="product-quantity visually-hidden">2</td>
+                                        <td class="product-price">
+                                            <span class="order-summary-emphasis">$ 20</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="product" data-product-id="1050917379" data-variant-id="1114496399">
+                                        <td class="product-image">
+                                            <div class="product-thumbnail">
+                                                <div class="product-thumbnail-wrapper">
+                                                    <img class="product-thumbnail-image" alt="Women's shirt	" src="images/product/product-2.jpg">
+                                                </div>
+                                                <span class="product-thumbnail-quantity" aria-hidden="true">1</span>
+                                            </div>
+                                        </td>
+                                        <td class="product-description">
+                                            <span class="product-description-name order-summary-emphasis">Women's shirt	</span>
+                                            <span class="product-description-variant order-summary-small-text">GREEN / M</span>
+                                        </td>
+                                        <td class="product-quantity visually-hidden">1</td>
+                                        <td class="product-price">
+                                            <span class="order-summary-emphasis">$ 27</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="product" data-product-id="1049226464" data-variant-id="1110655905">
+                                        <td class="product-image">
+                                            <div class="product-thumbnail">
+                                                <div class="product-thumbnail-wrapper">
+                                                    <img class="product-thumbnail-image" alt="Men Cargo shirt" src="images/product/product-3.jpg">
+                                                </div>
+                                                <span class="product-thumbnail-quantity" aria-hidden="true">1</span>
+                                            </div>
+                                        </td>
+                                        <td class="product-description">
+                                            <span class="product-description-name order-summary-emphasis">Men Cargo shirt</span>
+                                            <span class="product-description-variant order-summary-small-text">BLUE / S</span>
+                                        </td>
+                                        <td class="product-quantity visually-hidden">1</td>
+                                        <td class="product-price">
+                                            <span class="order-summary-emphasis">$ 25</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--                        <div class="order-summary-section order-summary-section-discount" data-order-summary-section="discount">-->
+                            <!--                            <form id="form_discount_add" accept-charset="UTF-8" method="post">-->
+                            <!--                                <input name="utf8" type="hidden" value="✓">-->
+                            <!--                                <div class="fieldset">-->
+                            <!--                                    <div class="field  ">-->
+                            <!--                                        <div class="field-input-btn-wrapper">-->
+                            <!--                                            <div class="field-input-wrapper">-->
+                            <!--                                                <label class="field-label" for="discount.code">vouncher</label>-->
+                            <!--                                                <input placeholder="vouncher" class="field-input" data-discount-field="true" autocomplete="false" autocapitalize="off" spellcheck="false" size="30" type="text" id="discount.code" name="discount.code" value="">-->
+                            <!--                                            </div>-->
+                            <!--                                            <button type="submit" class="field-input-btn btn btn-default btn-disabled">-->
+                            <!--                                                <span class="btn-content">Apply</span>-->
+                            <!--                                                <i class="btn-spinner icon icon-button-spinner"></i>-->
+                            <!--                                            </button>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </form>-->
+                            <!--                        </div>-->
+
+                            <div class="order-summary-section order-summary-section-total-lines payment-lines" data-order-summary-section="payment-lines">
+                                <table class="total-line-table">
+                                    <thead>
+                                    </thead>
+                                    </tbody>
+                                    <tr class="total-line">
+                                        <td class="total-line-name payment-due-label">
+                                            <span class="payment-due-label-total">Discount</span>
+                                        </td>
+                                        <td class="total-line-name payment-due">
+                                            <span class="payment-due-currency">USD</span>
+                                            <span class="payment-due-price" data-checkout-payment-due-target="144400000">2$
+                                        </span>
+                                        </td>
+                                    </tr>
+                                    <tfoot class="total-line-table-footer">
+                                    <tr class="total-line">
+                                        <td class="total-line-name payment-due-label">
+                                            <span class="payment-due-label-total">Total Price</span>
+                                        </td>
+                                        <td class="total-line-name payment-due">
+                                            <span class="payment-due-currency">USD</span>
+                                            <span class="payment-due-price" data-checkout-payment-due-target="144400000">70$
+                                        </span>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

@@ -208,7 +208,7 @@
                         <a href="login?action=CheckUser" class="stext-102 cl2 hov-cl1 trans-04">
                             My Account
                             <c:if test="${isLoggedIn eq true}">
-                                <span class="useraccount"> <%= session.getAttribute("user") %> </span>
+                                <span class="useraccount"> 123@gmail.com </span>
                             </c:if>
                         </a>
                     </li>

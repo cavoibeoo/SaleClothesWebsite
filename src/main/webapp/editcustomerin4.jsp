@@ -12,12 +12,12 @@
                 </c:if>
                 <div class="row">
                     <div id="add_address" class="col-md-12 form-list" style="margin-top: 30px;">
-                        <form accept-charset="UTF-8" name="Form" action="accountservlet" onsubmit="return validateForm()" id="customer_address" method="edit">
+                        <form accept-charset="UTF-8" name="Form" action="login" onsubmit="return validateForm()" id="customer_address" method="post">
                             <input name="FormType" type="hidden" value="customer_address">
                             <input name="utf8" type="hidden" value="true">
                             <p id="errorFillsx" style="margin-bottom: 10px; color: red; display: none;"></p>
                             <div class="clearfix row">
-                                <input type="hidden" name="action" value="add">
+                                <input type="hidden" name="action" value="edit">
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
                                         <label>Name<span>*</span></label>
@@ -32,8 +32,20 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>Address<span>*</span></label>
-                                        <input type="text" class="form-control req" name="address" placeholder="Input your address" value="">
+                                        <label>City<span>*</span></label>
+                                        <input type="text" class="form-control req" name="address" placeholder="Input your city" value="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label>District<span>*</span></label>
+                                        <input type="text" class="form-control req" name="address" placeholder="Input your district" value="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label>Street<span>*</span></label>
+                                        <input type="text" class="form-control req" name="address" placeholder="Input your street" value="">
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
@@ -42,7 +54,6 @@
                                         <input type="number" class="form-control req " name="phonenumber" placeholder="Input your phone number" value="">
                                     </fieldset>
                                 </div>
-
 
                                 <div class="form-group clearfix col-xs-12">
                                     <div class="col-sm-12" style="margin: 0px 15px;">

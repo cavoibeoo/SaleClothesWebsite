@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Entity
 @NamedQuery(name = "CheckLogin", query = "select e from CustomeraccountEntity e where e.mail = ?1 and e.pwd = ?2")
+@NamedQuery(name = "GetCusId", query = "select e.customerId from CustomeraccountEntity e where e.mail = ?1")
 @Table(name = "customeraccount", schema = "clothesstore")
 
 public class CustomeraccountEntity {
@@ -88,6 +89,23 @@ public class CustomeraccountEntity {
             return false;
         }catch (Exception exception) {
             return false;
+        }
+    }
+
+    public String GetCusId() {
+        try {
+            TypedQuery<CustomeraccountEntity> Result = entityManager.createNamedQuery("GetCusId", CustomeraccountEntity.class);
+            Result.setParameter(1, this.mail);
+            String customerid = null;
+            for (CustomeraccountEntity customer : Result.getResultList()) {
+                this.customerId = customer.getCustomerId();
+                this.pwd = customer.getPwd();
+                this.totalPayment = customer.getTotalPayment();
+                customerid = customer.GetCusId();
+            }
+            return customerid;
+        }catch (Exception exception) {
+            return null;
         }
     }
 }

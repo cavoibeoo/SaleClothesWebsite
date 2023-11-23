@@ -10,32 +10,18 @@ public class Main {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
 
-        try {
-            String checkedProducts[] = new String[] {"3"};
-            
-            for (int i=0; i<checkedProducts.length; i++){
-                CustomerProductEntityPK pk = new CustomerProductEntityPK();
-                pk.setCustomerId(1);
-                pk.setProductId(Integer.parseInt(checkedProducts[i]));
-                CustomerProductEntity product = entityManager.find(CustomerProductEntity.class, pk);
-                if (product != null){
-                    byte stat = 1;
-                    product.setStatus(stat);
-                    transaction.begin();
-                    entityManager.merge(product);
-                    transaction.commit();
-                }
-            }
-            transaction.begin();
-            Query query = entityManager.createNativeQuery("CALL PROC_DeleteBoughtInCart(:param1)");
-            query.setParameter("param1", 1);
-            query.executeUpdate();
-            transaction.commit();
-        } finally {
-            entityManager.close();
-            entityManagerFactory.close();
-        }
+        CustomerEntity cus1 = entityManager.find(CustomerEntity.class, 2);
+        String address = cus1.getAddress();
+        String phonnum = cus1.getPhoneNumber();
+        String firstname = cus1.getFirstName();
+        String lastname = cus1.getLastName();
+
+        System.out.println(address);
+        System.out.println(phonnum);
+        System.out.println(firstname);
+        System.out.println(lastname);
+
+
     }
 }
