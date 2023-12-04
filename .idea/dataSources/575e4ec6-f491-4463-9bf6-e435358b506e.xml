@@ -1473,154 +1473,151 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>11</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="406" parent="317" name="UKpkiqpon88raavavqba934vltb">
-      <ColNames>productName</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <index id="407" parent="317" name="FKlvhhj1h467pffymq6246va4ke">
+    <index id="406" parent="317" name="FKlvhhj1h467pffymq6246va4ke">
       <ColNames>categoryId</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="408" parent="317" name="FK54tkl2udntktbk3h1mrwp6rlm">
+    <index id="407" parent="317" name="FK54tkl2udntktbk3h1mrwp6rlm">
       <ColNames>colorId</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="409" parent="317" name="FKigaowodidjg442l8fj7lxfw1r">
+    <index id="408" parent="317" name="FKigaowodidjg442l8fj7lxfw1r">
       <ColNames>size_sizeId</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="410" parent="317" name="PRIMARY">
+    <key id="409" parent="317" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>productId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="411" parent="317" name="UKpkiqpon88raavavqba934vltb">
-      <ColNames>productName</ColNames>
-      <UnderlyingIndexName>UKpkiqpon88raavavqba934vltb</UnderlyingIndexName>
-    </key>
-    <foreign-key id="412" parent="317" name="FKlvhhj1h467pffymq6246va4ke">
+    <foreign-key id="410" parent="317" name="FKlvhhj1h467pffymq6246va4ke">
       <ColNames>categoryId</ColNames>
       <RefTableName>categoryentity</RefTableName>
       <RefColNames>categoryId</RefColNames>
     </foreign-key>
-    <foreign-key id="413" parent="317" name="FK54tkl2udntktbk3h1mrwp6rlm">
+    <foreign-key id="411" parent="317" name="FK54tkl2udntktbk3h1mrwp6rlm">
       <ColNames>colorId</ColNames>
       <RefTableName>colorentity</RefTableName>
       <RefColNames>colorId</RefColNames>
     </foreign-key>
-    <foreign-key id="414" parent="317" name="FKigaowodidjg442l8fj7lxfw1r">
+    <foreign-key id="412" parent="317" name="FKigaowodidjg442l8fj7lxfw1r">
       <ColNames>size_sizeId</ColNames>
       <RefTableName>sizeentity</RefTableName>
       <RefColNames>sizeId</RefColNames>
     </foreign-key>
-    <column id="415" parent="318" name="products_productId">
+    <column id="413" parent="318" name="products_productId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="416" parent="318" name="colors_colorId">
+    <column id="414" parent="318" name="colors_colorId">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="417" parent="318" name="FKteeu9av5sfqxnl630hik3ie54">
+    <index id="415" parent="318" name="FKteeu9av5sfqxnl630hik3ie54">
       <ColNames>products_productId</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="418" parent="318" name="FKo7jlkfq9ju39rb1dyt3yqbtpw">
+    <index id="416" parent="318" name="FKo7jlkfq9ju39rb1dyt3yqbtpw">
       <ColNames>colors_colorId</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="419" parent="318" name="FKteeu9av5sfqxnl630hik3ie54">
+    <foreign-key id="417" parent="318" name="FKteeu9av5sfqxnl630hik3ie54">
       <ColNames>products_productId</ColNames>
       <RefTableName>productentity</RefTableName>
       <RefColNames>productId</RefColNames>
     </foreign-key>
-    <foreign-key id="420" parent="318" name="FKo7jlkfq9ju39rb1dyt3yqbtpw">
+    <foreign-key id="418" parent="318" name="FKo7jlkfq9ju39rb1dyt3yqbtpw">
       <ColNames>colors_colorId</ColNames>
       <RefTableName>colorentity</RefTableName>
       <RefColNames>colorId</RefColNames>
     </foreign-key>
-    <column id="421" parent="319" name="productEntities_productId">
+    <column id="419" parent="319" name="productEntities_productId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="422" parent="319" name="sizes_sizeId">
+    <column id="420" parent="319" name="sizes_sizeId">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="423" parent="319" name="FKndbu35mpvykwstuwrmbnj2mjn">
+    <index id="421" parent="319" name="FKndbu35mpvykwstuwrmbnj2mjn">
       <ColNames>productEntities_productId</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="424" parent="319" name="FKrp5iq1eg93s25grmuatk69oyj">
+    <index id="422" parent="319" name="FKrp5iq1eg93s25grmuatk69oyj">
       <ColNames>sizes_sizeId</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="425" parent="319" name="FKndbu35mpvykwstuwrmbnj2mjn">
+    <foreign-key id="423" parent="319" name="FKndbu35mpvykwstuwrmbnj2mjn">
       <ColNames>productEntities_productId</ColNames>
       <RefTableName>productentity</RefTableName>
       <RefColNames>productId</RefColNames>
     </foreign-key>
-    <foreign-key id="426" parent="319" name="FKrp5iq1eg93s25grmuatk69oyj">
+    <foreign-key id="424" parent="319" name="FKrp5iq1eg93s25grmuatk69oyj">
       <ColNames>sizes_sizeId</ColNames>
       <RefTableName>sizeentity</RefTableName>
       <RefColNames>sizeId</RefColNames>
     </foreign-key>
-    <column id="427" parent="320" name="reviewId">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="428" parent="320" name="reviewContent">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="429" parent="320" name="customerId">
-      <Position>3</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <column id="430" parent="320" name="productId">
-      <Position>4</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <index id="431" parent="320" name="FK4pf8eh6pay7y2v60p9fdavnx3">
-      <ColNames>customerId</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="432" parent="320" name="FKmcjg29b1cv1m0xtldh919f5af">
-      <ColNames>productId</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="433" parent="320" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>reviewId</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="434" parent="320" name="FK4pf8eh6pay7y2v60p9fdavnx3">
-      <ColNames>customerId</ColNames>
-      <RefTableName>customerentity</RefTableName>
-      <RefColNames>customerId</RefColNames>
-    </foreign-key>
-    <foreign-key id="435" parent="320" name="FKmcjg29b1cv1m0xtldh919f5af">
-      <ColNames>productId</ColNames>
-      <RefTableName>productentity</RefTableName>
-      <RefColNames>productId</RefColNames>
-    </foreign-key>
-    <column id="436" parent="321" name="sizeId">
+    <column id="425" parent="320" name="reviewId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="437" parent="321" name="sizeName">
+    <column id="426" parent="320" name="rating">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="427" parent="320" name="reviewContent">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="428" parent="320" name="customerId">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="429" parent="320" name="productId">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="430" parent="320" name="FK4pf8eh6pay7y2v60p9fdavnx3">
+      <ColNames>customerId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="431" parent="320" name="FKmcjg29b1cv1m0xtldh919f5af">
+      <ColNames>productId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="432" parent="320" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>reviewId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="433" parent="320" name="FK4pf8eh6pay7y2v60p9fdavnx3">
+      <ColNames>customerId</ColNames>
+      <RefTableName>customerentity</RefTableName>
+      <RefColNames>customerId</RefColNames>
+    </foreign-key>
+    <foreign-key id="434" parent="320" name="FKmcjg29b1cv1m0xtldh919f5af">
+      <ColNames>productId</ColNames>
+      <RefTableName>productentity</RefTableName>
+      <RefColNames>productId</RefColNames>
+    </foreign-key>
+    <column id="435" parent="321" name="sizeId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="436" parent="321" name="sizeName">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="438" parent="321" name="PRIMARY">
+    <key id="437" parent="321" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sizeId</ColNames>
       <Primary>1</Primary>
