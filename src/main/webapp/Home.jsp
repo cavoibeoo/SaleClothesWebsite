@@ -9,7 +9,7 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-202 cl2 respon2">
-									Men Collection 2018
+									Vintage Collection
 								</span>
 							</div>
 								
@@ -33,7 +33,7 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
 								<span class="ltext-202 cl2 respon2">
-									Men New-Season
+									New Season of Clothes
 								</span>
 							</div>
 								
@@ -57,7 +57,7 @@
 						<div class="flex-col-l-m h-full p-t-100 p-b-30">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
 								<span class="ltext-202 cl2 respon2">
-									Women Collection 2018
+									Street Styles Collection
 								</span>
 							</div>
 								
@@ -90,11 +90,11 @@
 					<a href="product.jsp" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
 							<span class="block1-name ltext-102 trans-04 p-b-8">
-								Women
+								Top
 							</span>
 
 							<span class="block1-info stext-102 trans-04">
-								Spring 2018
+								Winter 2023
 							</span>
 						</div>
 
@@ -115,11 +115,11 @@
 					<a href="product.jsp" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
 							<span class="block1-name ltext-102 trans-04 p-b-8">
-								Men
+								Bottom
 							</span>
 
 							<span class="block1-info stext-102 trans-04">
-								Spring 2018
+								Winter 2023
 							</span>
 						</div>
 
@@ -140,7 +140,7 @@
 					<a href="product.jsp" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
 							<span class="block1-name ltext-102 trans-04 p-b-8">
-								Bags
+								Accessories
 							</span>
 
 							<span class="block1-info stext-102 trans-04">
@@ -159,7 +159,7 @@
 		</div>
 	</div>
 
-	<!-- Product -->
+<%--	<!-- Product -->
 	<section class="sec-product bg0 p-t-100 p-b-50">
 		<div class="container">
 			<div class="p-b-32">
@@ -1281,7 +1281,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section>--%>
 
 	<!-- Footer -->
 	<%@ include file="includes/footer.jsp" %>

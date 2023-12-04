@@ -1,5 +1,5 @@
 <%@ include file="includes/header.jsp" %>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <section class="address margin-top-20">
     <div class="container page_address">
         <div class="row">
@@ -12,56 +12,77 @@
                 </c:if>
                 <div class="row">
                     <div id="add_address" class="col-md-12 form-list" style="margin-top: 30px;">
-                        <form accept-charset="UTF-8" name="Form" action="login" onsubmit="return validateForm()" id="customer_address" method="post">
-                            <input name="FormType" type="hidden" value="customer_address">
-                            <input name="utf8" type="hidden" value="true">
-                            <p id="errorFillsx" style="margin-bottom: 10px; color: red; display: none;"></p>
+                        <form accept-charset="UTF-8" action="account" method="post">
                             <div class="clearfix row">
                                 <input type="hidden" name="action" value="edit">
+                                <%CustomerEntity currCustomer = (CustomerEntity) session.getAttribute("user");%>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>Name<span>*</span></label>
-                                        <input type="text" class="form-control req" required requiredmsg="Please fill this information!" name="firstName" placeholder="Input your name" value="Tran">
+                                        <label style="font-weight: bold;">First Name<span>*</span></label>
+                                        <input type="text" class="form-control req" required requiredmsg="Please fill this information!" name="fname" placeholder="Input your first name" value=<%=currCustomer.getCustomerFName()%>>
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>Surname<span>*</span></label>
-                                        <input type="text" class="form-control req" required requiredmsg="Please fill this information!" name="lastName" placeholder="Input your surname" value="Quang">
+                                        <label style="font-weight: bold;">Last Name<span>*</span></label>
+                                        <input type="text" class="form-control req" required requiredmsg="Please fill this information!" name="lname" placeholder="Input your last name" value=<%=currCustomer.getCustomerLName()%>>
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>City<span>*</span></label>
-                                        <input type="text" class="form-control req" name="address" placeholder="Input your city" value="">
+                                        <label style="font-weight: bold;">Province<span>*</span></label>
+                                        <select class="field-input" id="ls_province" name="customer_shipping_province">
+                                        </select>
+                                        <input type="text" id="input_ls_province" name="province" value="">
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>District<span>*</span></label>
-                                        <input type="text" class="form-control req" name="address" placeholder="Input your district" value="">
+                                        <label style="font-weight: bold;">District<span>*</span></label>
+                                        <select class="field-input" id="ls_district" name="customer_shipping_district">
+                                        </select>
+                                        <input type="text" id="input_ls_district" name="district" value="">
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>Street<span>*</span></label>
-                                        <input type="text" class="form-control req" name="address" placeholder="Input your street" value="">
+                                        <label style="font-weight: bold;">Ward<span>*</span></label>
+                                        <select class="field-input" id="ls_ward" name="customer_shipping_ward">
+                                        </select>
+                                        <input type="text" id="input_ls_ward" name="ward" value="">
                                     </fieldset>
                                 </div>
                                 <div class="col-xs-12 col-lg-12">
                                     <fieldset class="form-group">
-                                        <label>Phone number<span>*</span></label>
+                                        <label style="font-weight: bold;">Street<span>*</span></label>
+                                        <input type="text" class="form-control req " name="street" placeholder="Input your home address number" value="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <fieldset class="form-group">
+                                        <label style="font-weight: bold;">Phone number<span>*</span></label>
                                         <input type="number" class="form-control req " name="phonenumber" placeholder="Input your phone number" value="">
                                     </fieldset>
                                 </div>
-
                                 <div class="form-group clearfix col-xs-12">
                                     <div class="col-sm-12" style="margin: 0px 15px;">
                                         <div class="row">
-                                            <button class="btn-bg-addresss btn btn-lg btn-primary" type="submit" id="click_accept"><span>Save</span></button>
+                                            <button class="btn-bg-addresss btn btn-lg btn-primary" type="submit" id="click_accept" onclick="setInputValue()"><span>Save</span></button>
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                    function setInputValue() {
+                                        var selectedprovince = $("#ls_province").find(":selected").text();
+                                        $("#input_ls_province").val(selectedprovince);
+
+                                        var selecteddistrict = $("#ls_district").find(":selected").text();
+                                        $("#input_ls_district").val(selecteddistrict);
+
+                                        var selectedward = $("#ls_ward").find(":selected").text();
+                                        $("#input_ls_ward").val(selectedward);
+                                    }
+                                </script>
                             </div>
                         </form>
                     </div>

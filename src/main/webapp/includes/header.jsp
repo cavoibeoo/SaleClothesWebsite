@@ -1,5 +1,17 @@
-<%@ page import="entity.CustomerProductEntity" %>
-<%@ page import="entity.CustomerEntity" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="model.Cart" %>
+<%@ page import="model.CartItem" %>
+<%@ page import="model.ProductEntity" %>
+<%@ page import="model.CustomerEntity" %>
+<%@ page import="Service.CartService" %>
+<%@ page import="Service.impl.CartServiceImpl" %>
+<%@ page import="Controller.Customer.CartController" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="util.CookieUtil" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +47,19 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+    <link href="vendor2/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="vendor2/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="vendor2/quill/quill.snow.css" rel="stylesheet">
+    <link href="vendor2/quill/quill.bubble.css" rel="stylesheet">
+    <link href="vendor2/remixicon/remixicon.css" rel="stylesheet">
+    <link href="vendor2/simple-datatables/style.css" rel="stylesheet">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <!--===============================================================================================-->
+    <script src="js/vietnamlocalselector.js"></script>
+    <script src="js/citycombobox.js"></script>
     <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -62,11 +83,18 @@
                             </li>
 
                             <li class="label1" data-label1="hot">
-                                <a href="productList?">Shop</a>
+
+                                <form action="product" method="post">
+<%--                                    <a href="product?action=getShop">Shop</a>--%>
+                                    <input type="hidden" name="action" value="getShop">
+                                    <button type="submit" value="Submit">
+
+                                        Shop</button>
+                                </form>
                             </li>
 
                             <li>
-                                <a href="login?action=CheckCookie">Cart</a>
+                                <a href="cart?action=getCart">Cart</a>
                             </li>
 
                             <li>
@@ -83,15 +111,88 @@
                     <div class="wrap-icon-header flex-w flex-r-m h-full">
 
                         <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+                            <%
+                                int itemCount = 0;
+                                List<CartItem> products = new ArrayList<>();
+                                if (session.getAttribute("user")!=null ) {
+                                    CartController.getCart(request,response);
+                                    products = (List<CartItem>) session.getAttribute("cart");
+                                    itemCount = products.size();
+                                }
+                            %>
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="<%=itemCount%>">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                         </div>
 
                         <div class="flex-c-m h-full p-lr-19">
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
-                                <i class="zmdi zmdi-menu"></i>
-                            </div>
+                            <%if (session.getAttribute("user")!=null){%>
+                            <%CustomerEntity currCustomer = (CustomerEntity) session.getAttribute("user");%>
+
+                            <li class="nav-item dropdown pe-3">
+
+                                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                                    <img src="images/icons/avt.png" alt="Profile" class="rounded-circle">
+                                    <span class="d-none d-md-block dropdown-toggle ps-2"><%=currCustomer.getCustomerFName() + " " + currCustomer.getCustomerLName()%></span>
+                                </a><!-- End Profile Iamge Icon -->
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                                    <li class="dropdown-header">
+                                        <h6><%=currCustomer.getCustomerFName() + " " + currCustomer.getCustomerLName()%></h6>
+                                            <span class="useraccount">
+                                                <%
+                                                    Cookie[] cookies = request.getCookies();
+                                                    String emailAddress = CookieUtil.getCookieValue(cookies, "emailCookie");
+
+                                                    if (emailAddress != null && !emailAddress.equals("")) {
+                                                %>
+                                                    <%= emailAddress %>
+                                                <%
+                                                } else {
+                                                %>
+                                                    Welcome!
+                                                <%
+                                                    }
+                                                %>
+                                            </span>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="login?action=CheckUser">
+                                            <i class="bi bi-person"></i>
+                                            <span>My Account</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="contact.jsp">
+                                            <i class="bi bi-question-circle"></i>
+                                            <span>Need Help?</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center" href="login?action=logout">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <span>Sign Out</span>
+                                        </a>
+                                    </li>
+                                </ul><!-- End Profile Dropdown Items -->
+                            </li><!-- End Profile Nav -->
+                            <%}
+                            else {%>
+                            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="login?action=CheckUser">
+                                <span class="d-none d-md-block ps-2">Log In</span>
+                            </a>
+                            <%}%>
                         </div>
                     </div>
                 </nav>
@@ -135,7 +236,7 @@
                 <li>
                     <a href="Home.jsp">Home</a>
                     <!--					<ul class="sub-menu-m">-->
-                    <!--						<li><a href="productManage.html">Homepage 1</a></li>-->
+                    <!--						<li><a href="index.html">Homepage 1</a></li>-->
                     <!--						<li><a href="Home.jsp">Homepage 2</a></li>-->
                     <!--						<li><a href="home-03.html">Homepage 3</a></li>-->
                     <!--					</ul>-->
@@ -178,128 +279,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Menu -->
-    <aside class="wrap-sidebar js-sidebar">
-        <div class="s-full js-hide-sidebar"></div>
-
-        <div class="sidebar flex-col-l p-t-22 p-b-25">
-            <div class="flex-r w-full p-b-30 p-r-27">
-                <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-sidebar">
-                    <i class="zmdi zmdi-close"></i>
-                </div>
-            </div>
-
-            <div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
-                <ul class="sidebar-link w-full">
-                    <li class="p-b-13">
-                        <a href="Home.jsp" class="stext-102 cl2 hov-cl1 trans-04">
-                            Home
-                        </a>
-                    </li>
-
-                    <%--					<li class="p-b-13">--%>
-                    <%--						<a href="register.jsp" class="stext-102 cl2 hov-cl1 trans-04">--%>
-                    <%--							My Wishlist--%>
-                    <%--						</a>--%>
-                    <%--					</li>--%>
-
-                    <li class="p-b-13">
-                        <a href="login?action=CheckUser" class="stext-102 cl2 hov-cl1 trans-04">
-                            My Account
-                            <c:if test="${isLoggedIn eq true}">
-                                <span class="useraccount"> 123@gmail.com </span>
-                            </c:if>
-                        </a>
-                    </li>
-
-                    <%--					<li class="p-b-13">--%>
-                    <%--						<a href="shoping-cart.jsp" class="stext-102 cl2 hov-cl1 trans-04">--%>
-                    <%--							Track Oder--%>
-                    <%--						</a>--%>
-                    <%--					</li>--%>
-
-                    <li class="p-b-13">
-                        <a href="contact.jsp" class="stext-102 cl2 hov-cl1 trans-04">
-                            Help & FAQs
-                        </a>
-                    </li>
-                    <form action="login" method="post">
-                        <input type="hidden" name="action" value="logout">
-                        <c:if test="${isLoggedIn eq true}">
-                            <button class="Btn">
-                                <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
-                                <div class="text">Logout</div>
-                            </button>
-                        </c:if>
-                    </form>
-                </ul>
-
-                <%--				<div class="sidebar-gallery w-full p-tb-30">--%>
-                <%--					<span class="mtext-101 cl5">--%>
-                <%--						@ CozaStore--%>
-                <%--					</span>--%>
-
-                <%--					<div class="flex-w flex-sb p-t-36 gallery-lb">--%>
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-01.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-01.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-02.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-02.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-03.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-03.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-04.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-04.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-05.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-05.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-06.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-06.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-07.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-07.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-08.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-08.jpg');"></a>--%>
-                <%--						</div>--%>
-
-                <%--						<!-- item gallery sidebar -->--%>
-                <%--						<div class="wrap-item-gallery m-b-10">--%>
-                <%--							<a class="item-gallery bg-img1" href="images/gallery-09.jpg" data-lightbox="gallery" --%>
-                <%--							style="background-image: url('images/gallery-09.jpg');"></a>--%>
-                <%--						</div>--%>
-                <%--					</div>--%>
-                <%--				</div>--%>
-            </div>
-        </div>
-    </aside>
-
     <!-- Cart -->
     <div class="wrap-header-cart js-panel-cart">
         <div class="s-full js-hide-cart"></div>
@@ -317,76 +296,47 @@
 
             <div class="header-cart-content flex-w js-pscroll">
                 <ul class="header-cart-wrapitem w-full">
+                    <%
+                    float tmpSum = 0;
+                    if (session.getAttribute("user")!=null){
+                        for (CartItem cartItem : products){
+                            ProductEntity product = cartItem.getProduct();
+                    %>
 
-<%--                    <%CustomerEntity user = (CustomerEntity) session.getAttribute("user");%>--%>
-<%--                        <% List<CustomerProductEntity> customerCart = (List<CustomerProductEntity>) session.getAttribute("cart"); %>--%>
-<%--                        <c:if test="${customerCart != null}">--%>
-<%--                            <% for (CustomerProductEntity product : customerCart) { %>--%>
-                                <li class="header-cart-item flex-w flex-t m-b-12">
-                                    <div class="header-cart-item-img">
-<%--                                        <% String itemCartVariable = "images/item-cart-01" + /*product.getProductId() +*/ ".jpg"; %>--%>
-                                        <img src="images/item-cart-01" alt="IMG">
-                                    </div>
+                        <li class="header-cart-item flex-w flex-t m-b-12">
+                            <div class="header-cart-item-img">
+                                <% String item_img = "images/item_cart/item-cart-0" + product.getProductId() + ".jpg"; %>
+                                <img src="<%=item_img%>" alt="IMG">
+                            </div>
 
-                                    <div class="header-cart-item-txt p-t-8">
-                                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                            White Shirt Pleat
+                            <div class="header-cart-item-txt p-t-8">
+                                <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                    <%=product.getProductName()%>
+                                </a>
 
-                                        </a>
+                                <%
+                                tmpSum += product.getProductPrice()*cartItem.getCartItemQuantity();
+                                %>
 
-                                        <span class="header-cart-item-info">
-                                        1 x $19.00
-                                    </span>
-                                    </div>
-                                </li>
-
-<%--                            <% } %>--%>
-<%--                        </c:if>--%>
-<%--
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/item-cart-02.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                Converse All Star
-                            </a>
-
-                            <span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/item-cart-03.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                Nixon Porter Leather
-                            </a>
-
-                            <span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-                        </div>
-                    </li>
-                </ul>--%>
-
+                                <span class="header-cart-item-info">
+                                <%=cartItem.getCartItemQuantity()%> x $<%=product.getProductPrice()%>
+                                    (<%=product.getSize().getSizeName()%> / <%=product.getColor().getColorName()%>)
+                            </span>
+                            </div>
+                        </li>
+                        <%}%>
+                    <%}%>
                 <div class="w-full">
                     <div class="header-cart-total w-full p-tb-40">
-                        Total: $75.00
+                        Total: $<%=tmpSum%>>
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <a href="cart?" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                            View Cart
-                        </a>
+                        <%--<a href="cart?" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                            Check Out
+                        </a>--%>
 
-                        <a href="shoping-cart.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                        <a href="cart?" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Check Out
                         </a>
                     </div>

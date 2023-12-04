@@ -3,25 +3,28 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    <persistence-unit name="default">
-        <class>entity.CategoryEntity</class>
-        <class>entity.CustomerEntity</class>
-        <class>entity.CustomerProductEntity</class>
-        <class>entity.CustomeraccountEntity</class>
-        <class>entity.LevelsEntity</class>
-        <class>entity.OrderProductsEntity</class>
-        <class>entity.OrdersEntity</class>
-        <class>entity.ProductsEntity</class>
-        <class>entity.StyleEntity</class>
-        <class>entity.SizeEntity</class>
-        <class>entity.SizeProductEntity</class>
-
+    <persistence-unit name="SQL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>model.CustomerEntity</class>
+        <class>model.SizeEntity</class>
+        <class>model.ProductEntity</class>
+        <class>model.ColorEntity</class>
+        <class>model.CategoryEntity</class>
+        <class>model.ImageEntity</class>
+        <class>model.Cart</class>
+        <class>model.CartItem</class>
+        <class>model.OrderEntity</class>
+        <class>model.Review</class>
+        <class>model.OrderDetail</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/clothesstore"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="123456789"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clothestoredb"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="123456789"/>
             <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
         </properties>
     </persistence-unit>
 </persistence>

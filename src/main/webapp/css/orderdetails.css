@@ -516,6 +516,7 @@ div#section-shipping-rate,#section-payment-method {
 .step-footer .step-footer-previous-link {
     cursor: pointer;
     display: block;
+    text-decoration: inherit;
 }
 
 .step-footer .step-footer-previous-link .previous-link-icon {

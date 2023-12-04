@@ -1,4 +1,8 @@
-<%@ page import="entity.ProductsEntity" %>
+<%@ page import="Service.ProductService" %>
+<%@ page import="Service.impl.ProductServiceImpl" %>
+<%@ page import="model.*" %>
+<%@ page import="Service.ReviewService" %>
+<%@ page import="Service.impl.ReviewServiceImpl" %>
 <%@ include file="includes/header.jsp" %>
 
 	<!-- breadcrumb -->
@@ -30,7 +34,9 @@
 							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-							<%ProductsEntity currProduct = (ProductsEntity) session.getAttribute("currProductDetail");%>
+							<%
+								List<Review> reviews = (List<Review>) request.getAttribute("reviews");
+								ProductEntity currProduct = (ProductEntity) request.getAttribute("product");%>
 							<div class="slick3 gallery-lb">
 								<% String itemImage = "images/product_detail/product-detail-" + currProduct.getProductId() + ".jpg"; %>
 								<div class="item-slick3" data-thumb="<%=itemImage%>">
@@ -70,19 +76,22 @@
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-<%--							Lightweight Jacket--%>
 							<%=currProduct.getProductName()%>
 						</h4>
 
 						<span class="mtext-106 cl2">
-<%--							$58.79--%>
-							$<%=currProduct.getUnitPrice()%>
+							$<%=currProduct.getProductPrice()%>
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
-							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-						</p>
-						
+							<%=currProduct.getProductDesc()%>
+							</p>
+
+
+						<form action="cart" method="post">
+							<input type="hidden" name="action" value="addCart">
+							<input type="hidden" name="id" value="<%=currProduct.getProductId()%>">
+							<input type="hidden" name="productName" value="<%=currProduct.getProductName()%>">
 						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
@@ -92,12 +101,18 @@
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
+										<select class="js-select2" name="size">
+											<%
+												ProductService productService = new ProductServiceImpl();
+												List<SizeEntity> sizeList = productService.findAllExistSize(currProduct.getProductName());
+												for (SizeEntity size : sizeList){
+											%>
+<%--											<option>Choose an option</option>--%>
+											<option value="<%=size.getSizeId()%>"><%=size.getSizeName()%></option>
+											<%--<option value="2">Size M</option>
+											<option value="3">Size L</option>
+											<option value="4">Size XL</option>--%>
+											<%}%>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
@@ -111,19 +126,22 @@
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
+										<select class="js-select2" name="color">
+											<%
+												List<ColorEntity> colorList = productService.findAllExistColor(currProduct.getProductName());
+											for (ColorEntity color : colorList){
+											%>
+												<option value="<%=color.getColorId()%>"> <%=color.getColorName()%></option>
+											<%--<option value="2">Blue</option>
+											<option value="3">White</option>
+											<option value="4">Grey</option>--%>
+											<%}%>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
 							</div>
 
-							<form action="cart?action=buy&id=<%=currProduct.getProductId()%>" method="post">
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
 										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
@@ -144,8 +162,8 @@
 										</button>
 									</div>
 								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
@@ -184,7 +202,7 @@
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (<%=reviews.size()%>)</a>
 						</li>
 					</ul>
 
@@ -263,78 +281,82 @@
 							<div class="row">
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
-										<!-- Review -->
-										<div class="flex-w flex-t p-b-68">
-											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="images/avatar-01.jpg" alt="AVATAR">
-											</div>
-
-											<div class="size-207">
-												<div class="flex-w flex-sb-m p-b-17">
-													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
-													</span>
-
-													<span class="fs-18 cl11">
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
-													</span>
+										<!-- Review list-->
+										<%
+											for (Review review : reviews){
+										%>
+											<div class="flex-w flex-t p-b-68">
+												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+													<img src="images/avatar-01.jpg" alt="AVATAR">
 												</div>
 
-												<p class="stext-102 cl6">
-													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
-												</p>
+												<div class="size-207">
+													<div class="flex-w flex-sb-m p-b-17">
+														<span class="mtext-107 cl2 p-r-20">
+															<%=review.getCustomer().getCustomerFName() + " " + review.getCustomer().getCustomerLName()%>
+														</span>
+
+														<span class="fs-18 cl11">
+															<%for (int i=0; i< review.getRating(); i++){%>
+															<i class="zmdi zmdi-star"></i>
+															<%--<i class="zmdi zmdi-star"></i>
+															<i class="zmdi zmdi-star"></i>
+															<i class="zmdi zmdi-star"></i>
+															<i class="zmdi zmdi-star-half"></i>--%>
+															<%}%>
+														</span>
+													</div>
+
+													<p class="stext-102 cl6">
+														<%=review.getReviewContent()%>
+													</p>
+												</div>
 											</div>
-										</div>
+										<%}%>
 										
 										<!-- Add review -->
-										<form class="w-full">
+										<form class="w-full" action="review" method="post">
 											<h5 class="mtext-108 cl2 p-b-7">
 												Add a review
 											</h5>
 
 											<p class="stext-102 cl6">
-												Your email address will not be published. Required fields are marked *
+												${reviewMessage}
+												<c:if test="${isLogged ne true}">
+													<a href="login?action=checkUser">(go for login)</a>
+												</c:if>
 											</p>
 
-											<div class="flex-w flex-m p-t-50 p-b-23">
+											<c:if test="${isLogged eq true}">
+												<c:if test="${isBought eq true}">
+													<div class="flex-w flex-m p-t-50 p-b-23">
 												<span class="stext-102 cl3 m-r-16">
 													Your Rating
 												</span>
-
-												<span class="wrap-rating fs-18 cl11 pointer">
+													<span class="wrap-rating fs-18 cl11 pointer">
+													<input class="item-rating pointer zmdi zmdi-star-outline dis-none" name = "rating" value="5">
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
+<%--													&lt;%&ndash;<input class="dis-none" id="ratingInput" type="number" name="rating" value="1">&ndash;%&gt;
+												--%>
 												</span>
-											</div>
-
-											<div class="row p-b-25">
-												<div class="col-12 p-b-5">
-													<label class="stext-102 cl3" for="review">Your review</label>
-													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="name">Name</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="email">Email</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
-												</div>
-											</div>
-
-											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-												Submit
-											</button>
+													</div>
+													<div class="row p-b-25">
+														<div class="col-12 p-b-5">
+															<label class="stext-102 cl3" for="review">Your review</label>
+															<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="reviewContent"></textarea>
+														</div>
+													</div>
+													<input type="hidden" name="action" value="addReview">
+													<input type="hidden" name="productId" value="<%=currProduct.getProductId()%>">
+													<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+														Submit
+													</button>
+												</c:if>
+											</c:if>
 										</form>
 									</div>
 								</div>

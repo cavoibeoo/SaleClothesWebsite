@@ -1,18 +1,42 @@
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\login\LoginServlet.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\Main.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\util\CookieUtil.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\CustomerEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\CustomeraccountEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\OrderProductsEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\product\ProductListServlet.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\util\MailUtilLocal.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\DAO\DAO.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\ProductsEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\LevelsEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\CustomerProductEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\CustomerProductEntityPK.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\util\MailUtilGmail.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\StyleEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\CategoryEntity.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\OrderProductsEntityPK.java
-E:\GitHub_Repository\SaleClothesWebsite\src\main\java\entity\OrdersEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\ColorEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\OrderDetail.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\CustomerServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\OrderServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\Customer\AccountController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Main.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\CartItemService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\ImageEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\CartServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\ReviewService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\JpaConfig\JpaConfig.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\CartService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\OrderDetailServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\SizeEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\CartItemServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\OrderService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\LoginController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\Product\ProductController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\ProductServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\util\CookieUtil.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\CategoryService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\Customer\CartController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\CategoryServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\CustomerEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\ProductEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\ReviewServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\Review.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\OrderEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\CategoryEntity.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\CustomerService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\CategoryController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\OrderController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\OrderDetailsService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\ImageService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\CartItem.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\ProductService.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\ProductController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Service\impl\ImageServiceImpl.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\Customer\LoginController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\Customer\OrderController.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\model\Cart.java
+E:\CURRICULUM\University_3rd\Web Programming\ITProJect\API\ClothesStoreJPA\demo4\src\main\java\Controller\Product\ReviewController.java

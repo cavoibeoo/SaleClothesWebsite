@@ -57,12 +57,20 @@
                       <p class="text-center small">Enter your personal details to create account</p>
                     </div>
 
-                    <form class="row g-3 needs-validation" novalidate>
+                    <form class="card-body" novalidate>
                       <input type="hidden" name="action" value="regist" >
-                      <div class="col-12">
-                        <label for="yourName" class="form-label">Your Name</label>
-                        <input type="text" name="name" class="form-control" id="yourName" required>
-                        <div class="invalid-feedback">Please, enter your name!</div>
+                      <div class="input-col-md-5">
+                        <div class="col-md-6">
+                          <label for="firstname" class="form-label">First Name</label>
+                          <input type="text" name="fname" class="form-control" id="firstname" required>
+                          <div class="invalid-feedback">Please, enter your name!</div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="lastname" class="form-label">Last Name</label>
+                          <input type="text" name="lname" class="form-control" id="lastname" required>
+                          <div class="invalid-feedback">Please, enter your name!</div>
+                        </div>
                       </div>
 
                       <div class="col-12">
