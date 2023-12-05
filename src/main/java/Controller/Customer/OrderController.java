@@ -73,15 +73,6 @@ public class OrderController extends HttpServlet {
         for (int i=0; i<checkedProducts.length; i++) {
             CartItem cartItem = cartItemService.findById(Integer.parseInt(checkedProducts[i]));
             ProductEntity productEntity = productService.findById(cartItem.getProduct().getProductId());
-            if (cartItem.getCartItemQuantity() > productEntity.getProductInventory()){
-                String message = "Product '" + productEntity.getProductName()
-                                         +" (" + productEntity.getSize().getSizeName()
-                                         + " / " + productEntity.getColor().getColorName() +")' is out of stock";
-        
-                req.setAttribute("isOutOfStock",true);
-                req.setAttribute("outOfStockMessage",message);
-                return "shopping-cart.jsp";
-            }
             proceedProduct.add(cartItem);
         }
         
@@ -102,21 +93,15 @@ public class OrderController extends HttpServlet {
         HttpSession session = req.getSession();
         CustomerEntity user = (CustomerEntity) session.getAttribute("user");
         List<CartItem> products = (List<CartItem>) session.getAttribute("tempOrder");
+        String province = req.getParameter("selected_customer_shipping_province");
+        String district = req.getParameter("selected_customer_shipping_district");
+        String ward = req.getParameter("selected_customer_shipping_district");
+        String street = req.getParameter("street");
+        
+        String tmpAddr = street + ", " + ward +", " + district + ", " + province;
+        
         float tempPrice = (float) session.getAttribute("tempOrderPrice");
         
-        //Check stock
-        for (CartItem cartItem : products){
-            ProductEntity productEntity = productService.findById(cartItem.getProduct().getProductId());
-            if (cartItem.getCartItemQuantity() > productEntity.getProductInventory()){
-                String message = "Product '" + productEntity.getProductName()
-                                         +" (" + productEntity.getSize().getSizeName()
-                                         + " / " + productEntity.getColor().getColorName() +")' is out of stock";
-                
-                req.setAttribute("isOutOfStock",true);
-                req.setAttribute("outOfStockMessage",message);
-                return;
-            }
-        }
         // Create order
         OrderEntity order = new OrderEntity();
         order.setCustomer(user);
@@ -124,7 +109,8 @@ public class OrderController extends HttpServlet {
         order.setOrderDiscount(0);
         order.setOrderTotal(tempPrice - tempPrice*order.getOrderDiscount() + order.getOrderShipping());
         order.setOrderPaymentMethod("COD");
-        order.setShippingAddress(user.getCustomerAddress());
+        if (tmpAddr.equals("null") || tmpAddr.equals("")) order.setShippingAddress(user.getCustomerAddress());
+        else order.setShippingAddress(tmpAddr);
         orderService.create(order);
         
         // Create order detail
@@ -135,11 +121,6 @@ public class OrderController extends HttpServlet {
             orderDetail.setOrder(order);
             orderDetailsService.create(orderDetail);
             cartItemService.delete(cartItem.getCartItemId());
-            
-            // Reduce the number of the product in stock
-            ProductEntity productEntity = productService.findById(orderDetail.getProduct().getProductId());
-            productEntity.setProductInventory(productEntity.getProductInventory() - orderDetail.getOrderDetailQuantity());
-            productService.update(productEntity);
         }
     }
     

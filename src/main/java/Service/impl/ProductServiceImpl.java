@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductEntity> findAllDistinct() {
         EntityManager enma = JpaConfig.getEntityManager();
         ProductService productService = new ProductServiceImpl();
-        String jpql = "SELECT distinct p.productName FROM ProductEntity p";
+        String jpql = "SELECT distinct p.productName FROM ProductEntity p where p.isActivated=true";
         TypedQuery<String> query = enma.createQuery(jpql,String.class);
         
        List<String> nameList = query.getResultList();

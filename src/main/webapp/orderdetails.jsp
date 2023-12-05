@@ -58,14 +58,33 @@
                                                 document.getElementById('stored_addresses').addEventListener('change', function() {
                                                     var selectedValue = this.value;
 
+                                                    // Get the element with the cityGroup class
+                                                    const cityGroup = document.querySelector('.cityGroup');
+
+                                                    // Remove the 'hidden' attribute to unhide the div
+                                                    cityGroup.removeAttribute('hidden');
+
+                                                    // Set lable to please insert Street
                                                     if (selectedValue === '1') {
-                                                        /*document.getElementById('billing_address_full_name').value = ''; // Clear the specific field value
-                                                        document.getElementById('billing_address_phone').value = '';*/ // Clear the specific field value
+                                                        var addressLabel = document.querySelector('label[for="billing_address_address1"]');
+                                                        if (addressLabel) {
+                                                            var labelText = addressLabel.textContent;
+                                                                addressLabel.textContent = 'Address (please insert Street)';
+                                                        }
                                                         document.getElementById('billing_address_address1').value = ''; // Clear the specific field value
                                                     }
                                                     else {
-                                                        /*document.getElementById('billing_address_full_name').value = '<%=currCustomer.getCustomerFName()+currCustomer.getCustomerLName()%>'; // Clear the specific field value
-                                                        document.getElementById('billing_address_phone').value = '<%=currCustomer.getCustomerPhone()%>'; // Clear the specific field value*/
+                                                        // Get the element with the cityGroup class
+                                                        const cityGroup = document.querySelector('.cityGroup');
+
+                                                        // Remove the 'hidden' attribute to unhide the div
+                                                        cityGroup.setAttribute('hidden', true);
+
+                                                        var addressLabel = document.querySelector('label[for="billing_address_address1"]');
+                                                        if (addressLabel) {
+                                                            var labelText = addressLabel.textContent;
+                                                            addressLabel.textContent = 'Address';
+                                                        }
                                                         document.getElementById('billing_address_address1').value = '<%=currCustomer.getCustomerAddress()%>'; // Clear the specific field value
                                                     }
                                                 });
@@ -108,36 +127,44 @@
                                                     <div class="field-input-wrapper">
                                                         <label class="field-label" for="billing_address_address1">Address</label>
                                                         <input placeholder="Address" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text"
-                                                               id="billing_address_address1" name="billing_address[address1]"
+                                                               id="billing_address_address1" name="street"
                                                                value="<%=currCustomer.getCustomerAddress()%>">
                                                     </div>
                                                 </div>
-                                                <input name="selected_customer_shipping_country" type="hidden" value="241">
-                                                <input name="selected_customer_shipping_province" type="hidden" value="40">
-                                                <input name="selected_customer_shipping_district" type="hidden" value="431">
-                                                <input name="selected_customer_shipping_ward" type="hidden" value="23500">
-                                                <div class="field field-show-floating-label field-required field-third ">
-                                                    <div class="field-input-wrapper field-input-wrapper-select">
-                                                        <label class="field-label" for="ls_province"> City  </label>
-                                                        <select class="field-input" id="ls_province" name="customer_shipping_province">
-                                                        </select>
+
+                                                <div hidden class="cityGroup">
+                                                    <input name="selected_customer_shipping_country" type="hidden" value="241">
+                                                    <input name="selected_customer_shipping_province" type="hidden" value="40">
+                                                    <input name="selected_customer_shipping_district" type="hidden" value="431">
+                                                    <input name="selected_customer_shipping_ward" type="hidden" value="23500">
+                                                    <div class="field field-show-floating-label field-required field-third ">
+                                                        <div class="field-input-wrapper field-input-wrapper-select">
+                                                            <label class="field-label" for="ls_province"> City  </label>
+                                                            <select class="field-input" id="ls_province" name="customer_shipping_province">
+                                                            </select>
+                                                            <input type="text" id="input_ls_province" name="province" value="">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="field field-show-floating-label field-required field-third ">
-                                                    <div class="field-input-wrapper field-input-wrapper-select">
-                                                        <label class="field-label" for="ls_district">District</label>
-                                                        <select class="field-input" id="ls_district" name="customer_shipping_district">
-                                                        </select>
+                                                    <div class="field field-show-floating-label field-required field-third ">
+                                                        <div class="field-input-wrapper field-input-wrapper-select">
+                                                            <label class="field-label" for="ls_district">District</label>
+                                                            <select class="field-input" id="ls_district" name="customer_shipping_district">
+                                                            </select>
+                                                            <input type="text" id="input_ls_district" name="district" value="">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="field field-show-floating-label field-required  field-third  ">
-                                                    <div class="field-input-wrapper field-input-wrapper-select">
-                                                        <label class="field-label" for="ls_ward">Ward</label>
-                                                        <select class="field-input" id="ls_ward" name="customer_shipping_ward">
-                                                        </select>
+                                                    <div class="field field-show-floating-label field-required  field-third  ">
+                                                        <div class="field-input-wrapper field-input-wrapper-select">
+                                                            <label class="field-label" for="ls_ward">Ward</label>
+                                                            <select class="field-input" id="ls_ward" name="customer_shipping_ward">
+                                                            </select>
+                                                            <input type="text" id="input_ls_ward" name="ward" value="">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </form>
                                 </div>
@@ -163,7 +190,7 @@
         <div class="sidebar">
             <div class="sidebar-content">
                 <div class="order-summary order-summary-is-collapsed">
-                    <h2 class="visually-hidden">Thông tin đơn hàng</h2>
+                    <h2 class="visually-hidden">ORDER DETAILS</h2>
                     <div class="order-summary-sections">
                         <div class="order-summary-section order-summary-section-product-list" data-order-summary-section="line-items">
                             <table class="product-table">

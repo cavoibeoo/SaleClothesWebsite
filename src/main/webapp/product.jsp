@@ -1,4 +1,6 @@
-<%@ page import="model.ProductEntity" %>
+<%@ page import="model.*" %>
+<%@ page import="Service.CategoryService" %>
+<%@ page import="Service.impl.CategoryServiceImpl" %>
 <%@ include file="includes/header.jsp" %>
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140">
@@ -9,25 +11,15 @@
 					All Products
 				</button>
 
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-					Women
-				</button>
+				<%CategoryService categoryService = new CategoryServiceImpl();
+					List<model.CategoryEntity> categoryList = categoryService.findAllByActivated();
+					request.setAttribute("categoryList",categoryList);%>
 
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-					Men
-				</button>
-
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-					Bag
-				</button>
-
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-					Shoes
-				</button>
-
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-					Watches
-				</button>
+				<c:forEach var ="category" items="${categoryList}">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".${category.categoryName}">
+						${category.categoryName}
+					</button>
+				</c:forEach>
 			</div>
 
 			<div class="flex-w flex-c-m m-tb-10">
@@ -253,8 +245,7 @@
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<% String itemCartVariable = "images/product/product-" + product.getProductId() + ".jpg"; %>
-							<img src="<%= itemCartVariable %>" alt="IMG-PRODUCT">
+							<img src="data:image/jpeg;base64,<%=product.getImages().get(0).getProductImage()%>" alt="IMG-PRODUCT">
 
 							<a href="product?action=getDetails&productId=<%=product.getProductId()%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 <%--js-show-modal1--%>">
 								Details

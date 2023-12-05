@@ -103,8 +103,8 @@
 
                                                                                         <tr height="40px" id="1196577302" class="odd">
                                                                                             <td class="" style="max-width:300px">
-                                                                                                <a href="productDetail?id=<%=product.getProductId()%>" title="">
-                                                                                                    <img src="images/item_cart/item-cart-0<%=product.getProductId()%>.jpg" alt="IMG">
+                                                                                                <a href="product?action=getDetails&productId=<%=product.getProductId()%>" title="">
+                                                                                                    <img src="data:image/jpeg;base64,<%=product.getImages().get(0).getProductImage()%>" style="width: 100px" alt="IMG">
                                                                                                 </a>
                                                                                                 <br>
                                                                                                 <%=product.getProductName()%>

@@ -172,12 +172,25 @@
 
     $('.js-addcart-detail').each(function(){
         $(this).on('click', function(){
+
             swal("Product is added to cart !", "success");
 
             $(this).addClass('js-addcart-detail');
             $(this).off('click');
         });
     });
+
+    $('.js-addcart-detail-fail').each(function(){
+        $(this).on('click', function(){
+
+            swal("Add to cart failed!", "${notEnoughMessage}");
+
+            $(this).addClass('js-addcart-detail');
+            $(this).off('click');
+        });
+    });
+
+
 
     $('.js-sendingemail').each(function(){
         $(this).on('click', function(){

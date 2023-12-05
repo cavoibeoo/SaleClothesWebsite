@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryEntity> findAll(){
         EntityManager enma = JpaConfig.getEntityManager();
-        String jpql = "SELECT c FROM CategoryEntity c";
+        String jpql = "SELECT c FROM CategoryEntity c where c.isActivated = true";
         TypedQuery<CategoryEntity> query = enma.createQuery(jpql, CategoryEntity.class);
         return query.getResultList();
     }

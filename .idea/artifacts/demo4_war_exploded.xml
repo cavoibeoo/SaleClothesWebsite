@@ -11,7 +11,7 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="SaleClothesWebsite" />
+          <element id="module-output" name="demo4" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
@@ -49,7 +49,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/demo4-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="SaleClothesWebsite/web/Web" />
+      <element id="javaee-facet-resources" facet="demo4/web/Web" />
     </root>
   </artifact>
 </component>

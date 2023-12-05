@@ -305,12 +305,11 @@
 
                         <li class="header-cart-item flex-w flex-t m-b-12">
                             <div class="header-cart-item-img">
-                                <% String item_img = "images/item_cart/item-cart-0" + product.getProductId() + ".jpg"; %>
-                                <img src="<%=item_img%>" alt="IMG">
+                                <img src="data:image/jpeg;base64,<%=product.getImages().get(0).getProductImage()%>" alt="IMG">
                             </div>
 
                             <div class="header-cart-item-txt p-t-8">
-                                <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                <a href="product?action=getDetails&productId=<%=product.getProductId()%>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                     <%=product.getProductName()%>
                                 </a>
 

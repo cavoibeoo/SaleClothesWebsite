@@ -1,13 +1,7 @@
 
 import JpaConfig.JpaConfig;
-import Service.CartItemService;
-import Service.OrderDetailsService;
-import Service.OrderService;
-import Service.ReviewService;
-import Service.impl.CartItemServiceImpl;
-import Service.impl.OrderDetailServiceImpl;
-import Service.impl.OrderServiceImpl;
-import Service.impl.ReviewServiceImpl;
+import Service.*;
+import Service.impl.*;
 import model.*;
 import org.hibernate.Transaction;
 
@@ -29,12 +23,14 @@ public class Main {
         EntityManager entityManager = JpaConfig.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         ReviewService reviewService = new ReviewServiceImpl();
+        CategoryService categoryService = new CategoryServiceImpl();
         
         CustomerEntity customerEntity = JpaConfig.getEntityManager().find(CustomerEntity.class, 6);
         ProductEntity productEntity = JpaConfig.getEntityManager().find(ProductEntity.class, 3);
-        /*Review review = new Review("This is so good",customerEntity, productEntity, 5);
-        reviewService.insert(review);*/
-        boolean isBuy = reviewService.isBought(customerEntity, productEntity);
-        System.out.println(isBuy);
+    
+        List<CategoryEntity> categoryEntityList = categoryService.findAllByActivated();
+        for (CategoryEntity categoryEntity:categoryEntityList){
+            System.out.println(categoryEntity.getCategoryName());
+        }
     }
 }

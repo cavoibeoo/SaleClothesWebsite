@@ -6,6 +6,8 @@ import Service.ProductService;
 import Service.impl.CategoryServiceImpl;
 import Service.impl.ImageServiceImpl;
 import Service.impl.ProductServiceImpl;
+import model.CategoryEntity;
+import model.ImageEntity;
 import model.ProductEntity;
 import model.Review;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 
@@ -45,7 +48,9 @@ public class ProductController extends HttpServlet {
             throws  IOException,ServletException{
         try {
             List<ProductEntity> productList = productService.findAllDistinct();
+            List<CategoryEntity> categoryList = categoryService.findAllByActivated();
             HttpSession session = req.getSession();
+            req.setAttribute("categoryList",categoryList);
             session.setAttribute("productList", productList);
         }catch (Exception ex){
             ex.printStackTrace();
@@ -58,12 +63,19 @@ public class ProductController extends HttpServlet {
         try {
             int productId = Integer.parseInt(req.getParameter("productId"));
             ProductEntity productEntity = productService.findById(productId);
+            List<ImageEntity> itemImages = productEntity.getImages();
+        
+            if (productEntity.getProductInventory() == 0){
+                req.setAttribute("isOutOfStock",true);
+            }
+            
             if (productEntity != null){
                 req.setAttribute("product", productEntity);
+                req.setAttribute("itemImages",itemImages);
                 ReviewController.getReview(req, resp);
             }
             else {
-                String message = "Error item not found>";
+                String message = "Error item not found";
                 req.setAttribute("error",message);
             }
         }catch (Exception ex){

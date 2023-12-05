@@ -35,20 +35,22 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        String url = "/shopping-cart.jsp";
         
         if (session.getAttribute("user") == null){
-            String url = "/login.jsp";
+            url = "/login.jsp";
             req.getRequestDispatcher(url).forward(req, resp);
         };
         
         String action = req.getParameter("action");
+        String src = req.getParameter("src");
         if (action == null || action.equalsIgnoreCase("")) action = "getCart";
         if (action.equalsIgnoreCase("getCart")){
             getCart(req, resp);
         }
         else if (action.equalsIgnoreCase("addCart")){
             addCart(req,resp);
-            
+            if (req.getParameter("src") != null) url = "product?action=getDetails";
         }
         else if (action.equalsIgnoreCase("getDetails")){
             getCart(req,resp);
@@ -56,7 +58,7 @@ public class CartController extends HttpServlet {
         else if (action.equalsIgnoreCase("removeCart")){
             removeCart(req, resp);
         }
-        req.getRequestDispatcher("/shopping-cart.jsp").forward(req, resp);
+        req.getRequestDispatcher(url).forward(req, resp);
     }
     
     public static void getCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -92,6 +94,18 @@ public class CartController extends HttpServlet {
         
         ProductEntity modifiedProduct = productService.findByColorSize(productName, size, color);
         CartItem cartProduct = cartItemService.findItemInCart(cart.getCartId(), modifiedProduct);
+    
+        //Check Stock before adding
+        if (quantity > modifiedProduct.getProductInventory()){
+            String message = "Product quantity is greater than inventory left! ("
+                            + modifiedProduct.getProductInventory() + " left)";
+            req.setAttribute("notEnough",true);
+            req.setAttribute("notEnoughMessage",message);
+            return;
+        }
+        else {
+            req.setAttribute("notEnough",false);
+        }
         
         // If product existed then increase quantity, else add product to cart
         if (cartProduct != null){
@@ -100,17 +114,35 @@ public class CartController extends HttpServlet {
             if (cartProduct.getCartItemQuantity() <= 0){
                 cartItemService.delete(cartProduct.getCartItemId());
             }
-            else cartItemService.update(cartProduct);
+            else{
+                cartItemService.update(cartProduct);
+                
+                // Reduce the number of the product in stock
+                modifiedProduct.setProductInventory(modifiedProduct.getProductInventory() - quantity);
+                productService.update(modifiedProduct);
+            }
         }
         else {
             cartProduct = new CartItem(cart, modifiedProduct, quantity, modifiedProduct.getProductPrice()*quantity);
             cartItemService.insert(cartProduct);
+            
+            // Reduce the number of the product in stock
+            modifiedProduct.setProductInventory(modifiedProduct.getProductInventory() - quantity);
+            productService.update(modifiedProduct);
         }
+       
     }
     
     protected void removeCart(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int cartItemId = Integer.parseInt(req.getParameter("cartItemId")) ;
+        int cartItemId = Integer.parseInt(req.getParameter("cartItemId"));
+        CartItem cartItem = cartItemService.findById(cartItemId);
+        
+        //back to stock
+        ProductEntity productEntity = productService.findById(cartItem.getProduct().getProductId());
+        productEntity.setProductInventory(productEntity.getProductInventory() + cartItem.getCartItemQuantity());
+        productService.update(productEntity);
+        
         cartItemService.delete(cartItemId);
     }
     
